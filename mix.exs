@@ -1,7 +1,7 @@
 defmodule Geolix.Adapter.MMDB2.Mixfile do
   use Mix.Project
 
-  @url_github "https://github.com/mneudert/geolix_adapter_mmdb2"
+  @url_github "https://github.com/elixir-geolix/adapter_mmdb2"
 
   def project do
     [ app:     :geolix_adapter_mmdb2,
