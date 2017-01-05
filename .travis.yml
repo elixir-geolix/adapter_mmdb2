@@ -1,5 +1,38 @@
 language: elixir
 env:      MIX_ENV=test
 
+before_install:
+  # setup pip for "sudo: false"
+  - mkdir -p vendor/python
+  - export PYTHONPATH="${PYTHONPATH}:${TRAVIS_BUILD_DIR}/vendor/python"
+
+  # install python dependencies
+  - pip install --target="${TRAVIS_BUILD_DIR}/vendor/python" --ignore-installed geoip2
+
+  # fetch geolite2 databases
+  - mkdir -p data
+  - cd data
+  - wget -q "http://geolite.maxmind.com/download/geoip/database/GeoLite2-City.mmdb.gz"
+  - wget -q "http://geolite.maxmind.com/download/geoip/database/GeoLite2-Country.mmdb.gz"
+  - gunzip *
+  - cd "${TRAVIS_BUILD_DIR}"
+
+script:
+  # regular tests
+  - mix test
+
+  # result verification
+  - cd "${TRAVIS_BUILD_DIR}/verify"
+  - rm -f ./ip_set.txt
+  - . ./generate_ip_set.sh
+  - cd "${TRAVIS_BUILD_DIR}/verify/geolix"
+  - mix compile
+  - mix geolix.verify
+  - cd "${TRAVIS_BUILD_DIR}/verify/python"
+  - python verify.py
+  - cd "${TRAVIS_BUILD_DIR}/verify"
+  - diff geolix_results.txt python_results.txt
+  - cd "${TRAVIS_BUILD_DIR}"
+
 after_success:
   - mix coveralls.travis
