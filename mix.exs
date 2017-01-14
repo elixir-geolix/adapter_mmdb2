@@ -10,6 +10,7 @@ defmodule Geolix.Adapter.MMDB2.Mixfile do
       elixir:  "~> 1.0",
       deps:    deps(),
 
+      elixirc_paths:   elixirc_paths(Mix.env),
       build_embedded:  Mix.env == :prod,
       start_permanent: Mix.env == :prod,
 
@@ -42,6 +43,9 @@ defmodule Geolix.Adapter.MMDB2.Mixfile do
       source_ref: "master",
       source_url: @url_github ]
   end
+
+  defp elixirc_paths(:test), do: [ "lib", "test/fixtures" ]
+  defp elixirc_paths(_),     do: [ "lib" ]
 
   defp package do
     %{ files:       [ "CHANGELOG.md", "LICENSE", "mix.exs", "README.md", "lib" ],

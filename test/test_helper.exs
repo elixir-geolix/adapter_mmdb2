@@ -1,6 +1,3 @@
-Code.require_file("fixtures/list.exs", __DIR__)
-Code.require_file("fixtures/download.exs", __DIR__)
-
 alias Geolix.Adapter.MMDB2
 alias Geolix.Adapter.MMDB2TestFixtures
 

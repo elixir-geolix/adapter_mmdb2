@@ -1,11 +1,13 @@
 defmodule Geolix.Adapter.MMDB2TestFixtures.Download do
   @moduledoc false
 
+  alias Geolix.Adapter.MMDB2TestFixtures
+
   @doc """
   Downloads all fixture files.
   """
   def run() do
-    Enum.each(Geolix.Adapter.MMDB2TestFixtures.List.get(), &download/1)
+    Enum.each(MMDB2TestFixtures.List.get(), &download/1)
   end
 
   defp download({ _name, filename, remote }) do
