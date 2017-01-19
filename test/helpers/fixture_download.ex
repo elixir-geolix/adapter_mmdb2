@@ -1,13 +1,13 @@
-defmodule Geolix.Adapter.MMDB2TestFixtures.Download do
+defmodule Geolix.Adapter.MMDB2TestHelpers.FixtureDownload do
   @moduledoc false
 
-  alias Geolix.Adapter.MMDB2TestFixtures
+  alias Geolix.Adapter.MMDB2TestHelpers.FixtureList
 
   @doc """
   Downloads all fixture files.
   """
   def run() do
-    Enum.each(MMDB2TestFixtures.List.get(), &download/1)
+    Enum.each(FixtureList.get(), &download/1)
   end
 
   defp download({ _name, filename, remote }) do
@@ -33,7 +33,7 @@ defmodule Geolix.Adapter.MMDB2TestFixtures.Download do
   end
 
   defp local(filename) do
-    [ __DIR__, filename ]
+    [ __DIR__, "../fixtures/", filename ]
     |> Path.join()
     |> Path.expand()
   end

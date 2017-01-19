@@ -1,11 +1,12 @@
 alias Geolix.Adapter.MMDB2
-alias Geolix.Adapter.MMDB2TestFixtures
+alias Geolix.Adapter.MMDB2TestHelpers.FixtureDownload
+alias Geolix.Adapter.MMDB2TestHelpers.FixtureList
 
 
 { :ok, _ } = Application.ensure_all_started(:geolix)
-:ok        = MMDB2TestFixtures.Download.run()
+:ok        = FixtureDownload.run()
 
-databases = Enum.map MMDB2TestFixtures.List.get(), fn ({ id, filename, _remote }) ->
+databases = Enum.map FixtureList.get(), fn ({ id, filename, _remote }) ->
   source =
     [ __DIR__, "fixtures", filename ]
     |> Path.join()

@@ -1,4 +1,4 @@
-defmodule Geolix.Adapter.MMDB2TestFixtures.List do
+defmodule Geolix.Adapter.MMDB2TestHelpers.FixtureList do
   @moduledoc false
 
   @base_url "https://raw.githubusercontent.com/maxmind/MaxMind-DB/master/test-data"

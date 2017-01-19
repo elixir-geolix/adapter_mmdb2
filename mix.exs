@@ -44,7 +44,7 @@ defmodule Geolix.Adapter.MMDB2.Mixfile do
       source_url: @url_github ]
   end
 
-  defp elixirc_paths(:test), do: [ "lib", "test/fixtures" ]
+  defp elixirc_paths(:test), do: [ "lib", "test/helpers" ]
   defp elixirc_paths(_),     do: [ "lib" ]
 
   defp package do
