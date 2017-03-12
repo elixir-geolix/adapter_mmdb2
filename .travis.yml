@@ -1,6 +1,7 @@
-language: elixir
-elixir:   1.0.5
-env:      MIX_ENV=test
+language:    elixir
+otp_release: 18.0
+elixir:      1.2.6
+env:         MIX_ENV=test
 
 before_install:
   # setup pip for "sudo: false"
