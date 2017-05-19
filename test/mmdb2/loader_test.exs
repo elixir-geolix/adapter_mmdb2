@@ -15,6 +15,14 @@ defmodule Geolix.Adapter.MMDB2.Database.LoaderTest do
     assert { :error, :no_metadata } == Geolix.load_database(db)
   end
 
+  test "compressed databases" do
+    ip        = { 1, 1, 1, 1 }
+    expected  = %{ ip_address: ip, type: "test" }
+    databases = [ :testdata_gz, :testdata_plain, :testdata_tar, :testdata_targz ]
+
+    Enum.each databases, &(assert Geolix.lookup(ip, where: &1) == expected)
+  end
+
   test "reloading a database" do
     path_city    = Path.join([ @fixture_path, "GeoIP2-City-Test.mmdb" ])
     path_country = Path.join([ @fixture_path, "GeoIP2-Country-Test.mmdb" ])
