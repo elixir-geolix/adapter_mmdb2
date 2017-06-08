@@ -1,54 +1,65 @@
-language:    elixir
-otp_release: 18.0
-elixir:      1.2.6
-env:         MIX_ENV=test TRAVIS_COVERAGE=true
+language: elixir
 
-matrix:
+jobs:
   include:
-    - elixir: 1.3.4
-      env:    MIX_ENV=test
-    - elixir: 1.4.2
-      env:    MIX_ENV=test
-    - elixir:      1.4.2
-      otp_release: 19.0
-      env:         MIX_ENV=test
+    - &test
+      stage:         test
+      elixir:        1.2.6
+      otp_release:   18.0
+      after_success: mix coveralls.travis
+    - <<: *test
+      elixir:        1.3.4
+      otp_release:   18.0
+      after_success: true
+    - <<: *test
+      elixir:        1.4.2
+      otp_release:   18.0
+      after_success: true
+    - <<: *test
+      elixir:        1.4.2
+      otp_release:   19.0
+      after_success: true
 
-before_install:
-  # setup pip for "sudo: false"
-  - mkdir -p vendor/python
-  - export PYTHONPATH="${PYTHONPATH}:${TRAVIS_BUILD_DIR}/vendor/python"
+    - stage:          verify
+      elixir:         1.2.6
+      otp_release:    18.0
+      before_install: |-
+        # setup pip for "sudo: false"
+        mkdir -p vendor/python
 
-  # install python dependencies
-  - pip install --target="${TRAVIS_BUILD_DIR}/vendor/python" --ignore-installed geoip2
+        export PYTHONPATH="${PYTHONPATH}:${TRAVIS_BUILD_DIR}/vendor/python"
 
-  # fetch geolite2 databases
-  - mkdir -p data
-  - cd data
-  - wget -q "http://geolite.maxmind.com/download/geoip/database/GeoLite2-City.tar.gz"
-  - wget -q "http://geolite.maxmind.com/download/geoip/database/GeoLite2-Country.tar.gz"
-  - tar -xzf GeoLite2-City.tar.gz
-  - tar -xzf GeoLite2-Country.tar.gz
-  - find . -name '*.mmdb' -exec mv {} . \;
-  - cd "${TRAVIS_BUILD_DIR}"
+        # install python dependencies
+        pip install --target="${TRAVIS_BUILD_DIR}/vendor/python" --ignore-installed geoip2
 
-script:
-  # regular tests
-  - mix test
+        # fetch GeoLite2 databases
+        mkdir -p data
 
-  # result verification
-  - cd "${TRAVIS_BUILD_DIR}/verify"
-  - rm -f ./ip_set.txt
-  - . ./generate_ip_set.sh
-  - cd "${TRAVIS_BUILD_DIR}/verify/geolix"
-  - mix compile
-  - mix geolix.verify
-  - cd "${TRAVIS_BUILD_DIR}/verify/python"
-  - python verify.py
-  - cd "${TRAVIS_BUILD_DIR}/verify"
-  - diff geolix_results.txt python_results.txt
-  - cd "${TRAVIS_BUILD_DIR}"
+        pushd data
+          wget -q "http://geolite.maxmind.com/download/geoip/database/GeoLite2-City.tar.gz"
+          wget -q "http://geolite.maxmind.com/download/geoip/database/GeoLite2-Country.tar.gz"
 
-after_success: |
-  if [ ! -z "${TRAVIS_COVERAGE}" ]; then
-    mix coveralls.travis
-  fi
+          tar -xzf GeoLite2-City.tar.gz
+          tar -xzf GeoLite2-Country.tar.gz
+
+          find . -name '*.mmdb' -exec mv {} . \;
+        popd
+      script: |-
+        cd "${TRAVIS_BUILD_DIR}/verify"
+
+        rm -f ./ip_set.txt
+        . ./generate_ip_set.sh
+
+        # verify geolix results
+        pushd geolix
+          mix compile
+          mix geolix.verify
+        popd
+
+        # verify python results
+        pushd python
+          python verify.py
+        popd
+
+        # diff results
+        diff geolix_results.txt python_results.txt
