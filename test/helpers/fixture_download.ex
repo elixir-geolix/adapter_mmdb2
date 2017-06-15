@@ -20,16 +20,10 @@ defmodule Geolix.Adapter.MMDB2TestHelpers.FixtureDownload do
     end
   end
 
-  if Version.match?(System.version, ">= 1.1.0") do
-    defp download_fixture(remote, local) do
-      { :ok, content } = Mix.Utils.read_path(remote)
+  defp download_fixture(remote, local) do
+    { :ok, content } = Mix.Utils.read_path(remote)
 
-      File.write! local, content
-    end
-  else
-    defp download_fixture(remote, local) do
-      File.write! local, Mix.Utils.read_path!(remote)
-    end
+    File.write! local, content
   end
 
   defp local(filename) do
