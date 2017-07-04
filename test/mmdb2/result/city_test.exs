@@ -1,8 +1,10 @@
 defmodule Geolix.Adapter.MMDB2.Result.CityTest do
   use ExUnit.Case, async: true
 
+  alias Geolix.Adapter.MMDB2.Util
   alias Geolix.Record.Subdivision
   alias Geolix.Result.City
+
 
   test "result type" do
     result = Geolix.lookup("2.125.160.216", where: :fixture_city)
@@ -31,7 +33,7 @@ defmodule Geolix.Adapter.MMDB2.Result.CityTest do
 
   test "ipv6 lookup" do
     ip                  = "2001:298::"
-    { :ok, ip_address } = ip |> String.to_char_list() |> :inet.parse_address()
+    { :ok, ip_address } = ip |> Util.to_charlist() |> :inet.parse_address()
 
     result = Geolix.lookup(ip, where: :fixture_city)
 

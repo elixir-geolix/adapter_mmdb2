@@ -1,7 +1,9 @@
 defmodule Geolix.Adapter.MMDB2.Result.CountryTest do
   use ExUnit.Case, async: true
 
+  alias Geolix.Adapter.MMDB2.Util
   alias Geolix.Result.Country
+
 
   test "result type" do
     assert %Country{} = Geolix.lookup("2.125.160.216", where: :fixture_country)
@@ -25,7 +27,7 @@ defmodule Geolix.Adapter.MMDB2.Result.CountryTest do
 
   test "ipv6 lookup" do
     ip                  = "2001:218::"
-    { :ok, ip_address } = ip |> String.to_char_list() |> :inet.parse_address()
+    { :ok, ip_address } = ip |> Util.to_charlist() |> :inet.parse_address()
 
     result = Geolix.lookup(ip, where: :fixture_country)
 

@@ -68,8 +68,8 @@ defmodule Geolix.Adapter.MMDB2.Database.LoaderTest do
 
     httpd_opts         = [ port:          0,
                            server_name:   'geolix_test',
-                           server_root:   @fixture_path |> to_char_list,
-                           document_root: @fixture_path |> to_char_list ]
+                           server_root:   MMDB2.Util.to_charlist(@fixture_path),
+                           document_root: MMDB2.Util.to_charlist(@fixture_path) ]
     { :ok, httpd_pid } = :inets.start(:httpd, httpd_opts)
 
     # test remote file loading
