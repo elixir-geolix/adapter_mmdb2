@@ -1,7 +1,6 @@
 defmodule Geolix.Adapter.MMDB2.Result.ASNTest do
   use ExUnit.Case, async: true
 
-  alias Geolix.Adapter.MMDB2.Util
   alias Geolix.Result.ASN
 
 
@@ -21,7 +20,7 @@ defmodule Geolix.Adapter.MMDB2.Result.ASNTest do
 
   test "ipv6 lookup" do
     ip                  = "2600:6000::"
-    { :ok, ip_address } = ip |> Util.to_charlist() |> :inet.parse_address()
+    { :ok, ip_address } = ip |> String.to_charlist() |> :inet.parse_address()
 
     result   = Geolix.lookup(ip, where: :fixture_asn)
     expected = %ASN{ ip_address:                     ip_address,
