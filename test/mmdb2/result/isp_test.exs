@@ -1,7 +1,6 @@
 defmodule Geolix.Adapter.MMDB2.Result.ISPTest do
   use ExUnit.Case, async: true
 
-  alias Geolix.Adapter.MMDB2.Util
   alias Geolix.Result.ISP
 
 
