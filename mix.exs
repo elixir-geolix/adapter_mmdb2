@@ -34,7 +34,9 @@ defmodule Geolix.Adapter.MMDB2.Mixfile do
     [ { :ex_doc,      ">= 0.0.0", only: :dev },
       { :excoveralls, "~> 0.7",   only: :test },
       { :geolix,      "~> 0.14",  only: :test },
-      { :hackney,     "~> 1.0",   only: :test } ]
+      { :hackney,     "~> 1.0",   only: :test },
+
+      { :mmdb2_decoder, "~> 0.1.0" } ]
   end
 
   defp docs do
