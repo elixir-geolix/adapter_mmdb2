@@ -27,7 +27,10 @@ defmodule Geolix.Adapter.MMDB2.Mixfile do
   end
 
   def application do
-    [ applications: [ :logger ]]
+    [
+      applications: [ :logger ],
+      included_applications: [ :mmdb2_decoder ]
+    ]
   end
 
   defp deps do
