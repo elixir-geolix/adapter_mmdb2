@@ -2,20 +2,23 @@ defmodule Geolix.Verification.Mixfile do
   use Mix.Project
 
   def project do
-    [ app:       :geolix_verification,
-      version:   "0.0.1",
-      elixir:    "~> 1.0",
-      deps:      deps(),
+    [
+      app: :geolix_verification,
+      version: "0.0.1",
+      elixir: "~> 1.0",
+      deps: deps(),
       deps_path: "../../deps",
-      lockfile:  "../../mix.lock",
-
-      preferred_cli_env: [ 'geolix.verify': :test ] ]
+      lockfile: "../../mix.lock",
+      preferred_cli_env: ["geolix.verify": :test]
+    ]
   end
 
-  def application, do: [ applications: [ :geolix ] ]
+  def application, do: [applications: [:geolix]]
 
   defp deps do
-    [ { :geolix, "~> 0.14", only: :test },
-      { :geolix_adapter_mmdb2, path: "../../", only: :test } ]
+    [
+      {:geolix, "~> 0.14", only: :test},
+      {:geolix_adapter_mmdb2, path: "../../", only: :test}
+    ]
   end
 end
