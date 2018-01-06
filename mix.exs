@@ -10,17 +10,15 @@ defmodule Geolix.Adapter.MMDB2.Mixfile do
       version: "0.1.0-dev",
       elixir: "~> 1.3",
       deps: deps(),
+      description: "MMDB2 adapter for Geolix",
+      docs: docs(),
       elixirc_paths: elixirc_paths(Mix.env()),
-      build_embedded: Mix.env() == :prod,
-      start_permanent: Mix.env() == :prod,
+      package: package(),
       preferred_cli_env: [
         coveralls: :test,
         "coveralls.detail": :test,
         "coveralls.travis": :test
       ],
-      description: "MMDB2 adapter for Geolix",
-      docs: docs(),
-      package: package(),
       test_coverage: [tool: ExCoveralls]
     ]
   end
