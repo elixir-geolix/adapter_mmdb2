@@ -6,13 +6,6 @@ defmodule Geolix.Adapter.MMDB2.Database.LoaderTest do
 
   @fixture_path [__DIR__, "../fixtures"] |> Path.join() |> Path.expand()
 
-  test "error if database contains no metadata" do
-    path = Path.join([@fixture_path, ".gitignore"])
-    db = %{id: :invalid, adapter: MMDB2, source: path}
-
-    assert {:error, :no_metadata} == Geolix.load_database(db)
-  end
-
   test "compressed databases" do
     ip = {1, 1, 1, 1}
     expected = %{ip_address: ip, type: "test"}
@@ -79,6 +72,13 @@ defmodule Geolix.Adapter.MMDB2.Database.LoaderTest do
 
     assert :ok = Geolix.load_database(db)
     assert %Result.City{} = Geolix.lookup("2.125.160.216", where: :remote)
+  end
+
+  test "error if database contains no metadata" do
+    path = Path.join([@fixture_path, ".gitignore"])
+    db = %{id: :invalid, adapter: MMDB2, source: path}
+
+    assert {:error, :no_metadata} == Geolix.load_database(db)
   end
 
   test "database with invalid filename (not found)" do
