@@ -10,7 +10,7 @@ defmodule Geolix.Adapter.MMDB2.Reader do
   """
   @spec read_database(String.t()) ::
           {Metadata.t(), binary, binary}
-          | {:error | term}
+          | {:error, term}
   def read_database("http" <> _ = filename) do
     {:ok, _} = Application.ensure_all_started(:inets)
 
