@@ -44,8 +44,7 @@ defmodule Geolix.Adapter.MMDB2.Mixfile do
 
   defp docs do
     [
-      extras: ["CHANGELOG.md", "README.md"],
-      main: "readme",
+      main: "Geolix.Adapter.MMDB2",
       source_ref: "master",
       source_url: @url_github
     ]
