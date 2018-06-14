@@ -2,6 +2,14 @@
 
 MMDB2 adapter for [`Geolix`](https://github.com/elixir-geolix/geolix).
 
+## Benchmark
+
+A (minimal) benchmark script looking up a predefined ip address is included:
+
+```shell
+mix bench.lookup
+```
+
 ## License
 
 [Apache License, Version 2.0](http://www.apache.org/licenses/LICENSE-2.0)
