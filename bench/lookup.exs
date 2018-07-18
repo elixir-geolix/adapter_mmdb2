@@ -1,9 +1,6 @@
 defmodule Geolix.Adapter.MMDB2.Benchmark.Lookup do
   def run() do
-    database =
-      [Geolix.TestData.dir(:mmdb2), "Benchmark.mmdb"]
-      |> Path.join()
-      |> Path.expand()
+    database = determine_database()
 
     case File.exists?(database) do
       true ->
@@ -16,10 +13,23 @@ defmodule Geolix.Adapter.MMDB2.Benchmark.Lookup do
             source: database
           })
 
+        IO.puts("Using database at #{database}\n")
         run_benchmark()
 
       false ->
         IO.warn("Expected database not found at #{database}")
+    end
+  end
+
+  defp determine_database() do
+    case System.argv() do
+      [] ->
+        [Geolix.TestData.dir(:mmdb2), "Benchmark.mmdb"]
+        |> Path.join()
+        |> Path.expand()
+
+      [path] ->
+        Path.expand(path)
     end
   end
 
