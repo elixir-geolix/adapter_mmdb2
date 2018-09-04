@@ -13,6 +13,7 @@ defmodule Mix.Tasks.Geolix.Verify do
 
   def run(_args) do
     {:ok, _} = Application.ensure_all_started(:geolix)
+    true = wait_until_ready(5000)
     result_file = @results |> File.open!([:write, :utf8])
 
     @ip_set
@@ -67,4 +68,17 @@ defmodule Mix.Tasks.Geolix.Verify do
   defp parse_country(%{country: country}), do: country
 
   defp parse_country(_), do: ""
+
+  defp wait_until_ready(0), do: false
+
+  defp wait_until_ready(timeout) do
+    case Geolix.lookup("8.8.8.8") do
+      %{asn: _, city: _, country: _} ->
+        true
+
+      _ ->
+        :timer.sleep(10)
+        wait_until_ready(timeout - 10)
+    end
+  end
 end
