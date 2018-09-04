@@ -17,7 +17,7 @@ defmodule Geolix.Verification.Mixfile do
 
   defp deps do
     [
-      {:geolix, "~> 0.14", only: :test},
+      {:geolix, "~> 0.17", only: :test},
       {:geolix_adapter_mmdb2, path: "../../", only: :test}
     ]
   end
