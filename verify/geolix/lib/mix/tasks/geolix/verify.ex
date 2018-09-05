@@ -72,8 +72,10 @@ defmodule Mix.Tasks.Geolix.Verify do
   defp wait_until_ready(0), do: false
 
   defp wait_until_ready(timeout) do
-    case Geolix.lookup("8.8.8.8") do
-      %{asn: _, city: _, country: _} ->
+    databases = Geolix.Database.Loader.loaded_databases() |> Enum.sort()
+
+    case databases do
+      [:asn, :city, :country] ->
         true
 
       _ ->
