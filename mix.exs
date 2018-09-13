@@ -8,7 +8,7 @@ defmodule Geolix.Adapter.MMDB2.Mixfile do
       app: :geolix_adapter_mmdb2,
       name: "Geolix Adapter: MMDB2",
       version: "0.1.0-dev",
-      elixir: "~> 1.3",
+      elixir: "~> 1.5",
       aliases: aliases(),
       deps: deps(),
       description: "MMDB2 adapter for Geolix",
