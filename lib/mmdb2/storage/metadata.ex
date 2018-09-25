@@ -1,17 +1,5 @@
 defmodule Geolix.Adapter.MMDB2.Storage.Metadata do
-  @moduledoc """
-  Geolix MMDB2 metadata storage.
-
-  ## Usage
-
-      iex> alias MMDB2Decoder.Metadata
-      iex> set(:some_database_name, %Metadata{ database_type: "doctest" })
-      :ok
-      iex> get(:some_database_name)
-      %Metadata{ database_type: "doctest" }
-      iex> get(:unregistered_database)
-      nil
-  """
+  @moduledoc false
 
   alias MMDB2Decoder.Metadata
 

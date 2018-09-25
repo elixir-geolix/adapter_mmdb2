@@ -1,16 +1,5 @@
 defmodule Geolix.Adapter.MMDB2.Storage.Data do
-  @moduledoc """
-  Geolix MMDB2 data storage.
-
-  ## Usage
-
-      iex> set(:some_database_name, << 1, 2, 3 >>)
-      :ok
-      iex> get(:some_database_name)
-      << 1, 2, 3 >>
-      iex> get(:unregistered_database)
-      nil
-  """
+  @moduledoc false
 
   @name Geolix.Adapter.MMDB2.Names.storage(:data)
 

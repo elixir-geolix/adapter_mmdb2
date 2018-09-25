@@ -1,7 +1,5 @@
 defmodule Geolix.Adapter.MMDB2.Result do
-  @moduledoc """
-  Converts raw lookup results into structured data.
-  """
+  @moduledoc false
 
   alias Geolix.Adapter.MMDB2.Result
 

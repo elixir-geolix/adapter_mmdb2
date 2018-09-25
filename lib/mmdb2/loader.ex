@@ -1,7 +1,5 @@
 defmodule Geolix.Adapter.MMDB2.Loader do
-  @moduledoc """
-  Loader module to load an MMDB2 database into Geolix.
-  """
+  @moduledoc false
 
   alias Geolix.Adapter.MMDB2.Reader
   alias Geolix.Adapter.MMDB2.Storage

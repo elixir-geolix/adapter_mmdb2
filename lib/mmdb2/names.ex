@@ -1,7 +1,5 @@
 defmodule Geolix.Adapter.MMDB2.Names do
-  @moduledoc """
-  Provides usable GenServer names.
-  """
+  @moduledoc false
 
   @doc """
   Returns GenServer names for storage processes.

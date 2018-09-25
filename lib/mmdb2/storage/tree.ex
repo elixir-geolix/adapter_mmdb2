@@ -1,16 +1,5 @@
 defmodule Geolix.Adapter.MMDB2.Storage.Tree do
-  @moduledoc """
-  Geolix MMDB2 tree storage.
-
-  ## Usage
-
-      iex> set(:some_database_name, << 1, 2, 3 >>)
-      :ok
-      iex> get(:some_database_name)
-      << 1, 2, 3 >>
-      iex> get(:unregistered_database)
-      nil
-  """
+  @moduledoc false
 
   @name Geolix.Adapter.MMDB2.Names.storage(:tree)
 

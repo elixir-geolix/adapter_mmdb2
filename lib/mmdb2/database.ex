@@ -1,10 +1,5 @@
 defmodule Geolix.Adapter.MMDB2.Database do
-  @moduledoc """
-  Module to interact with mmdb2 databases.
-
-  This includes proxy methods for reading the database and lookup up
-  entries.
-  """
+  @moduledoc false
 
   alias Geolix.Adapter.MMDB2.Result
   alias Geolix.Adapter.MMDB2.Storage
