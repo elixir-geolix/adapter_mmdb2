@@ -8,8 +8,7 @@ defmodule Geolix.Verification.Mixfile do
       elixir: "~> 1.5",
       deps: deps(),
       deps_path: "../../deps",
-      lockfile: "../../mix.lock",
-      preferred_cli_env: ["geolix.verify": :test]
+      lockfile: "../../mix.lock"
     ]
   end
 
@@ -17,8 +16,8 @@ defmodule Geolix.Verification.Mixfile do
 
   defp deps do
     [
-      {:geolix, "~> 0.17", only: :test},
-      {:geolix_adapter_mmdb2, path: "../../", only: :test}
+      {:geolix, "~> 0.17"},
+      {:geolix_adapter_mmdb2, path: "../../"}
     ]
   end
 end
