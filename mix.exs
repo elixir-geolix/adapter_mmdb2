@@ -42,7 +42,7 @@ defmodule Geolix.Adapter.MMDB2.Mixfile do
       {:benchee, "~> 0.11.0", only: :bench},
       {:ex_doc, ">= 0.0.0", only: :dev},
       {:excoveralls, "~> 0.10", only: :test},
-      {:geolix, "~> 0.17", only: [:bench, :test]},
+      {:geolix, "~> 0.17"},
       {:geolix_testdata, "~> 0.3.0", only: [:bench, :test]},
       {:hackney, "~> 1.0", only: :test},
       {:mmdb2_decoder, "~> 0.4.0", override: true}
