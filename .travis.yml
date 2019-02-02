@@ -62,3 +62,8 @@ jobs:
 
         # diff results
         diff geolix_results.txt python_results.txt
+
+    - stage: code quality
+      elixir: 1.8.1
+      otp_release: 21.0
+      script: mix format --check-formatted
