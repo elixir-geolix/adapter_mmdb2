@@ -40,6 +40,7 @@ defmodule Geolix.Adapter.MMDB2.Mixfile do
   defp deps do
     [
       {:benchee, "~> 0.13.0", only: :bench},
+      {:credo, "~> 1.0", only: :dev, runtime: false},
       {:ex_doc, ">= 0.0.0", only: :dev},
       {:excoveralls, "~> 0.10", only: :test},
       {:geolix, "~> 0.17"},
