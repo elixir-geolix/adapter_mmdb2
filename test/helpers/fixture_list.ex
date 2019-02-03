@@ -15,7 +15,7 @@ defmodule Geolix.Adapter.MMDB2TestHelpers.FixtureList do
       }
   """
   @spec get() :: list
-  def get() do
+  def get do
     [
       {
         :fixture_anonymous,
