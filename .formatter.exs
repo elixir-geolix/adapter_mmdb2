@@ -1,6 +1,6 @@
 [
   inputs: [
-    "{bench,lib,test,verify}/**/*.{ex,exs}",
-    "{.formatter,mix}.exs"
+    "{bench,config,lib,test,verify}/**/*.{ex,exs}",
+    "{.credo,.formatter,mix}.exs"
   ]
 ]
