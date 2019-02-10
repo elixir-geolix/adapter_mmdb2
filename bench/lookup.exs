@@ -1,5 +1,5 @@
 defmodule Geolix.Adapter.MMDB2.Benchmark.Lookup do
-  def run() do
+  def run do
     database = determine_database()
 
     case File.exists?(database) do
@@ -21,7 +21,7 @@ defmodule Geolix.Adapter.MMDB2.Benchmark.Lookup do
     end
   end
 
-  defp determine_database() do
+  defp determine_database do
     case System.argv() do
       [] ->
         [Geolix.TestData.dir(:mmdb2), "Benchmark.mmdb"]
@@ -33,7 +33,7 @@ defmodule Geolix.Adapter.MMDB2.Benchmark.Lookup do
     end
   end
 
-  defp run_benchmark() do
+  defp run_benchmark do
     {:ok, lookup_ipv4} = :inet.parse_address('1.1.1.1')
     {:ok, lookup_ipv4_in_ipv6} = :inet.parse_address('::1.1.1.1')
 

@@ -3,6 +3,8 @@ defmodule Mix.Tasks.Geolix.Verify do
   Verifies Geolix results.
   """
 
+  alias Geolix.Database.Loader
+
   use Mix.Task
 
   @shortdoc "Verifies parser results"
@@ -72,9 +74,9 @@ defmodule Mix.Tasks.Geolix.Verify do
   defp wait_until_ready(0), do: false
 
   defp wait_until_ready(timeout) do
-    databases = Geolix.Database.Loader.loaded_databases() |> Enum.sort()
-
-    case databases do
+    Loader.loaded_databases()
+    |> Enum.sort()
+    |> case do
       [:asn, :city, :country] ->
         true
 
