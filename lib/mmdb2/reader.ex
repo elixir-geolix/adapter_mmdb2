@@ -1,8 +1,6 @@
 defmodule Geolix.Adapter.MMDB2.Reader do
   @moduledoc false
 
-  alias MMDB2Decoder.Metadata
-
   @doc """
   Reads a database file and returns the data and metadata parts from it.
   """
