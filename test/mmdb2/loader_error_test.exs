@@ -7,19 +7,19 @@ defmodule Geolix.Adapter.MMDB2.Database.LoaderErrorTest do
 
   test "error if database contains no metadata" do
     path = Path.join([@fixture_path, ".gitignore"])
-    db = %{id: :invalid, adapter: MMDB2, source: path}
+    db = %{id: :nometa_database, adapter: MMDB2, source: path}
 
     assert {:error, :no_metadata} == Geolix.load_database(db)
   end
 
   test "database with invalid filename (not found)" do
-    db = %{id: :unknown_database, adapter: MMDB2, source: "invalid"}
+    db = %{id: :notfound_database, adapter: MMDB2, source: "invalid"}
 
     assert {:error, :enoent} = Geolix.load_database(db)
   end
 
   test "database with invalid filename (remote not found)" do
-    db = %{id: :unknown_database, adapter: MMDB2, source: "http://does.not.exist/"}
+    db = %{id: :notremote_database, adapter: MMDB2, source: "http://does.not.exist/"}
     err = Geolix.load_database(db)
 
     assert {:error, {:remote, {:failed_connect, _}}} = err
