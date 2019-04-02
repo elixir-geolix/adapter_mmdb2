@@ -1,5 +1,7 @@
 defmodule Geolix.Adapter.MMDB2.Database.LoaderErrorTest do
-  use ExUnit.Case, async: true
+  use ExUnit.Case, async: false
+
+  import ExUnit.CaptureLog
 
   alias Geolix.Adapter.MMDB2
 
@@ -9,19 +11,36 @@ defmodule Geolix.Adapter.MMDB2.Database.LoaderErrorTest do
     path = Path.join([@fixture_path, ".gitignore"])
     db = %{id: :nometa_database, adapter: MMDB2, source: path}
 
-    assert {:error, :no_metadata} == Geolix.load_database(db)
+    log =
+      capture_log(fn ->
+        assert {:error, :no_metadata} == Geolix.load_database(db)
+      end)
+
+    assert log =~ ":nometa_database"
+    assert log =~ ":no_metadata"
   end
 
   test "database with invalid filename (not found)" do
     db = %{id: :notfound_database, adapter: MMDB2, source: "invalid"}
 
-    assert {:error, :enoent} = Geolix.load_database(db)
+    log =
+      capture_log(fn ->
+        assert {:error, :enoent} = Geolix.load_database(db)
+      end)
+
+    assert log =~ ":notfound_database"
+    assert log =~ ":enoent"
   end
 
   test "database with invalid filename (remote not found)" do
     db = %{id: :notremote_database, adapter: MMDB2, source: "http://does.not.exist/"}
-    err = Geolix.load_database(db)
 
-    assert {:error, {:remote, {:failed_connect, _}}} = err
+    log =
+      capture_log(fn ->
+        assert {:error, {:remote, {:failed_connect, _}}} = Geolix.load_database(db)
+      end)
+
+    assert log =~ ":notremote_database"
+    assert log =~ ":remote"
   end
 end

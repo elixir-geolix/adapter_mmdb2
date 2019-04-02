@@ -1,6 +1,8 @@
 defmodule Geolix.Adapter.MMDB2.Loader do
   @moduledoc false
 
+  require Logger
+
   alias Geolix.Adapter.MMDB2.Reader
   alias Geolix.Adapter.MMDB2.Storage
 
@@ -37,7 +39,13 @@ defmodule Geolix.Adapter.MMDB2.Loader do
   """
   def unload_database(%{id: id}), do: store_data({:ok, nil, nil, nil}, id)
 
-  defp store_data({:error, _reason} = error, _), do: error
+  defp store_data({:error, reason} = error, id) do
+    Logger.info(fn ->
+      "Failed to load database #{inspect(id)}: #{inspect(reason)}"
+    end)
+
+    error
+  end
 
   defp store_data({:ok, meta, tree, data}, id) do
     Storage.Data.set(id, data)
