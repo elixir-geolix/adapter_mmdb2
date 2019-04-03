@@ -16,8 +16,7 @@ defmodule Geolix.Adapter.MMDB2.Database.LoaderErrorTest do
         assert {:error, :no_metadata} == Geolix.load_database(db)
       end)
 
-    assert log =~ ":nometa_database"
-    assert log =~ ":no_metadata"
+    assert log =~ "Failed to read metadata for database :nometa_database"
   end
 
   test "database with invalid filename (not found)" do
@@ -28,8 +27,7 @@ defmodule Geolix.Adapter.MMDB2.Database.LoaderErrorTest do
         assert {:error, :enoent} = Geolix.load_database(db)
       end)
 
-    assert log =~ ":notfound_database"
-    assert log =~ ":enoent"
+    assert log =~ "Source for database :notfound_database not found"
   end
 
   test "database with invalid filename (remote not found)" do
@@ -40,7 +38,6 @@ defmodule Geolix.Adapter.MMDB2.Database.LoaderErrorTest do
         assert {:error, {:remote, {:failed_connect, _}}} = Geolix.load_database(db)
       end)
 
-    assert log =~ ":notremote_database"
-    assert log =~ ":remote"
+    assert log =~ "Failed to read remote for database :notremote_database"
   end
 end

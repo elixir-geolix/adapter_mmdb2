@@ -28,10 +28,10 @@ defmodule Geolix.Adapter.MMDB2.Loader do
     |> load_database()
   end
 
-  def load_database(%{id: id, source: source}) do
+  def load_database(%{source: source} = database) do
     source
     |> Reader.read_database()
-    |> store_data(id)
+    |> store_data(database)
   end
 
   @doc """
@@ -39,7 +39,31 @@ defmodule Geolix.Adapter.MMDB2.Loader do
   """
   def unload_database(%{id: id}), do: store_data({:ok, nil, nil, nil}, id)
 
-  defp store_data({:error, reason} = error, id) do
+  defp store_data({:error, :enoent} = error, %{id: id, source: source}) do
+    Logger.info(fn ->
+      "Source for database #{inspect(id)} not found: #{inspect(source)}"
+    end)
+
+    error
+  end
+
+  defp store_data({:error, :no_metadata} = error, %{id: id}) do
+    Logger.info(fn ->
+      "Failed to read metadata for database #{inspect(id)}"
+    end)
+
+    error
+  end
+
+  defp store_data({:error, {:remote, reason}} = error, %{id: id}) do
+    Logger.info(fn ->
+      "Failed to read remote for database #{inspect(id)}: #{inspect(reason)}"
+    end)
+
+    error
+  end
+
+  defp store_data({:error, reason} = error, %{id: id}) do
     Logger.info(fn ->
       "Failed to load database #{inspect(id)}: #{inspect(reason)}"
     end)
@@ -47,7 +71,7 @@ defmodule Geolix.Adapter.MMDB2.Loader do
     error
   end
 
-  defp store_data({:ok, meta, tree, data}, id) do
+  defp store_data({:ok, meta, tree, data}, %{id: id}) do
     Storage.Data.set(id, data)
     Storage.Metadata.set(id, meta)
     Storage.Tree.set(id, tree)
