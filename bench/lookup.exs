@@ -46,7 +46,7 @@ defmodule Geolix.Adapter.MMDB2.Benchmark.Lookup do
           Geolix.lookup(lookup_ipv4, where: :benchmark)
         end
       },
-      formatter_options: %{console: %{comparison: false}},
+      formatters: [{Benchee.Formatters.Console, comparison: false}],
       warmup: 2,
       time: 10
     )
