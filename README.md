@@ -31,3 +31,5 @@ By default the benchmark uses the `Benchmark.mmdb` database provided by `:geolix
 ## License
 
 [Apache License, Version 2.0](http://www.apache.org/licenses/LICENSE-2.0)
+
+License information about the supported [MaxMind GeoIP2 Country](https://www.maxmind.com/en/geoip2-country-database), [MaxMind GeoIP2 City](https://www.maxmind.com/en/geoip2-city) and [MaxMind GeoLite2](https://dev.maxmind.com/geoip/geoip2/geolite2/) databases can be found on their respective sites.
