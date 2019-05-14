@@ -2,6 +2,22 @@
 
 MMDB2 adapter for [`Geolix`](https://github.com/elixir-geolix/geolix).
 
+## Package Setup
+
+To use the Geolix MMDB2 Adapter with your projects, edit your `mix.exs` file and add the required dependencies:
+
+```elixir
+defp deps do
+  [
+    # ...
+    {:geolix_adapter_mmdb2, "~> 0.1.0"},
+    # ...
+  ]
+end
+```
+
+An appropriate version of `:geolix` is automatically selected by the adapter's dependency tree.
+
 ## Benchmark
 
 A (minimal) benchmark script looking up a predefined ip address is included:
