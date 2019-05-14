@@ -18,6 +18,26 @@ end
 
 An appropriate version of `:geolix` is automatically selected by the adapter's dependency tree.
 
+## Adapter Configuration
+
+To start using the adapter with a compatible database you need to add the required configuration entry to your `:geolix` configuration:
+
+```elixir
+config :geolix,
+  databases: [
+    %{
+      id: :geolite2_city,
+      adapter: Geolix.Adapter.MMDB2,
+      source: "/absolute/path/to/GeoLite2-City.mmdb"
+    },
+    %{
+      id: :geolite2_country,
+      adapter: Geolix.Adapter.MMDB2,
+      source: "/absolute/path/to/GeoLite2-Country.mmdb"
+    }
+  ]
+```
+
 ## Benchmark
 
 A (minimal) benchmark script looking up a predefined ip address is included:
