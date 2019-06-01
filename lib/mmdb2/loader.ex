@@ -7,12 +7,12 @@ defmodule Geolix.Adapter.MMDB2.Loader do
   alias Geolix.Adapter.MMDB2.Storage
 
   @doc """
-  Implementation of `Geolix.Adapter.MMDB2.load_database/1`.
+  Loads a database into storage.
 
   Requires the parameter `:source` as the location of the database. Can access
-  the system environment by receiving a `{ :system, "env_var_name" }` tuple.
+  the system environment by receiving a `{:system, "env_var_name"}` tuple.
 
-  Using `{ :system, "env_var_name", "/path/to/default.mmdb2" }` you can define
+  Using `{:system, "env_var_name", "/path/to/default.mmdb2"}` you can define
   a fallback value to be used if the environment variable is not set.
   """
   @spec load_database(map) :: :ok | {:error, term}
@@ -35,7 +35,7 @@ defmodule Geolix.Adapter.MMDB2.Loader do
   end
 
   @doc """
-  Implementation of `Geolix.Adapter.MMDB2.unload_database/1`.
+  Removes a database from storage.
   """
   def unload_database(database), do: store_data({:ok, nil, nil, nil}, database)
 
