@@ -1,4 +1,4 @@
-defmodule Geolix.Adapter.MMDB2.Mixfile do
+defmodule Geolix.Adapter.MMDB2.MixProject do
   use Mix.Project
 
   @url_github "https://github.com/elixir-geolix/adapter_mmdb2"
