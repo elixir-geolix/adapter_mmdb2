@@ -30,4 +30,7 @@ defmodule Geolix.Adapter.MMDB2 do
       where -> Database.lookup(ip, where, opts)
     end
   end
+
+  @impl Geolix.Adapter
+  def unload_database(database), do: Loader.unload_database(database)
 end
