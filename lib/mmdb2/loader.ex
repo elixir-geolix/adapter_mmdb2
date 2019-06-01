@@ -37,7 +37,7 @@ defmodule Geolix.Adapter.MMDB2.Loader do
   @doc """
   Implementation of `Geolix.Adapter.MMDB2.unload_database/1`.
   """
-  def unload_database(%{id: id}), do: store_data({:ok, nil, nil, nil}, id)
+  def unload_database(database), do: store_data({:ok, nil, nil, nil}, database)
 
   defp store_data({:error, :enoent} = error, %{id: id, source: source}) do
     _ =
