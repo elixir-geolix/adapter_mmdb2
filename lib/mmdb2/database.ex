@@ -5,17 +5,10 @@ defmodule Geolix.Adapter.MMDB2.Database do
   alias Geolix.Adapter.MMDB2.Storage
 
   @doc """
-  Implementation of `Geolix.Adapter.MMDB2.lookup/2`.
+  Performs a lookup in a loaded database.
   """
-  @spec lookup(tuple, Keyword.t()) :: map | nil
-  def lookup(ip, opts) do
-    case opts[:where] do
-      nil -> nil
-      where -> lookup(ip, where, opts)
-    end
-  end
-
-  defp lookup(ip, where, opts) do
+  @spec lookup(tuple, atom, Keyword.t()) :: map | nil
+  def lookup(ip, where, opts) do
     data = Storage.Data.get(where)
     meta = Storage.Metadata.get(where)
     tree = Storage.Tree.get(where)

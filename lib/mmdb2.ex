@@ -9,6 +9,7 @@ defmodule Geolix.Adapter.MMDB2 do
 
   @behaviour Geolix.Adapter
 
+  @impl Geolix.Adapter
   def database_workers do
     import Supervisor.Spec
 
@@ -19,7 +20,14 @@ defmodule Geolix.Adapter.MMDB2 do
     ]
   end
 
-  defdelegate load_database(database), to: Loader
+  @impl Geolix.Adapter
+  def load_database(database), do: Loader.load_database(database)
 
-  defdelegate lookup(ip, opts), to: Database
+  @impl Geolix.Adapter
+  def lookup(ip, opts) do
+    case opts[:where] do
+      nil -> nil
+      where -> Database.lookup(ip, where, opts)
+    end
+  end
 end
