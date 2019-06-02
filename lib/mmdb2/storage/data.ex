@@ -1,11 +1,13 @@
 defmodule Geolix.Adapter.MMDB2.Storage.Data do
   @moduledoc false
 
-  @doc """
-  Starts the data agent.
-  """
-  @spec start_link() :: Agent.on_start()
-  def start_link, do: Agent.start_link(fn -> %{} end, name: __MODULE__)
+  use Agent
+
+  @doc false
+  @spec start_link(map) :: Agent.on_start()
+  def start_link(initial_value \\ %{}) do
+    Agent.start_link(fn -> initial_value end, name: __MODULE__)
+  end
 
   @doc """
   Fetches the data for a database.
