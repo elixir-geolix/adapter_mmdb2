@@ -5,11 +5,8 @@ defmodule Geolix.Adapter.MMDB2.Database.LoaderErrorTest do
 
   alias Geolix.Adapter.MMDB2
 
-  @fixture_path Path.expand("../fixtures", __DIR__)
-
   test "error if database contains no metadata" do
-    path = Path.join([@fixture_path, ".gitignore"])
-    db = %{id: :nometa_database, adapter: MMDB2, source: path}
+    db = %{id: :nometa_database, adapter: MMDB2, source: __ENV__.file}
 
     log =
       capture_log(fn ->
