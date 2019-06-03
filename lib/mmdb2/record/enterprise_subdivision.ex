@@ -13,6 +13,7 @@ defmodule Geolix.Adapter.MMDB2.Record.EnterpriseSubdivision do
 
   @behaviour Model
 
+  @impl Model
   def from(nil, _), do: nil
 
   def from(data, locale) when is_list(data) do

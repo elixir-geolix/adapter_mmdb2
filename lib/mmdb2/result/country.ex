@@ -16,6 +16,7 @@ defmodule Geolix.Adapter.MMDB2.Result.Country do
 
   @behaviour Model
 
+  @impl Model
   def from(data, locale) do
     %__MODULE__{
       continent: Record.Continent.from(data[:continent], locale),

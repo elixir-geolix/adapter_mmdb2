@@ -11,6 +11,7 @@ defmodule Geolix.Adapter.MMDB2.Record.Postal do
 
   @behaviour Model
 
+  @impl Model
   def from(nil, _), do: nil
   def from(data, _), do: struct(__MODULE__, data)
 end

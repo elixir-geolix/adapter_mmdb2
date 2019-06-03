@@ -14,5 +14,6 @@ defmodule Geolix.Adapter.MMDB2.Result.AnonymousIP do
 
   @behaviour Model
 
+  @impl Model
   def from(data, _), do: struct(__MODULE__, data)
 end

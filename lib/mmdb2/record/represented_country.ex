@@ -16,6 +16,7 @@ defmodule Geolix.Adapter.MMDB2.Record.RepresentedCountry do
 
   @behaviour Model
 
+  @impl Model
   def from(nil, _), do: nil
 
   def from(data, nil) do

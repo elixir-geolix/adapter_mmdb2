@@ -13,6 +13,7 @@ defmodule Geolix.Adapter.MMDB2.Result.Enterprise do
 
   @behaviour Model
 
+  @impl Model
   def from(data, locale) do
     %__MODULE__{
       city: Record.EnterpriseCity.from(data[:city], locale),
