@@ -6,6 +6,10 @@ defmodule Geolix.Adapter.MMDB2.Loader do
   alias Geolix.Adapter.MMDB2.Reader
   alias Geolix.Adapter.MMDB2.Storage
 
+  @type database :: %{
+          required(:source) => binary | {:system, binary} | {:system, binary, binary}
+        }
+
   @doc """
   Loads a database into storage.
 
@@ -15,7 +19,7 @@ defmodule Geolix.Adapter.MMDB2.Loader do
   Using `{:system, "env_var_name", "/path/to/default.mmdb2"}` you can define
   a fallback value to be used if the environment variable is not set.
   """
-  @spec load_database(map) :: :ok | {:error, term}
+  @spec load_database(database) :: :ok | {:error, term}
   def load_database(%{source: {:system, var, default}} = database) do
     database
     |> Map.put(:source, System.get_env(var) || default)
