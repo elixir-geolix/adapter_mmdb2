@@ -21,22 +21,27 @@ defmodule Geolix.Adapter.MMDB2.Database do
   defp lookup(_, _, _, nil, _), do: nil
 
   defp lookup(ip, data, meta, tree, opts) do
-    ip
-    |> MMDB2Decoder.lookup(meta, tree, data)
-    |> unroll()
-    |> maybe_include_ip(ip)
-    |> maybe_to_struct(meta.database_type, opts[:as] || :struct, opts)
+    case MMDB2Decoder.lookup(ip, meta, tree, data) do
+      {:error, _} ->
+        nil
+
+      {:ok, nil} ->
+        nil
+
+      {:ok, result} ->
+        result_as = Keyword.get(opts, :as, :struct)
+
+        result
+        |> Map.put(:ip_address, ip)
+        |> maybe_to_struct(result_as, meta, opts)
+    end
   end
 
-  defp maybe_include_ip(nil, _), do: nil
-  defp maybe_include_ip(result, ip), do: Map.put(result, :ip_address, ip)
+  defp maybe_to_struct(result, :raw, _, _), do: result
 
-  defp maybe_to_struct(result, _, :raw, _), do: result
+  defp maybe_to_struct(result, :struct, %{database_type: type}, opts) do
+    locale = Keyword.get(opts, :locale, :en)
 
-  defp maybe_to_struct(result, type, :struct, opts) do
-    Result.to_struct(type, result, opts[:locale] || :en)
+    Result.to_struct(type, result, locale)
   end
-
-  defp unroll({:error, _}), do: nil
-  defp unroll({:ok, result}), do: result
 end
