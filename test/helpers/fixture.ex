@@ -12,9 +12,7 @@ defmodule Geolix.Adapter.MMDB2TestHelpers.Fixture do
     {:fixture_country, "GeoIP2-Country-Test.mmdb"},
     {:fixture_domain, "GeoIP2-Domain-Test.mmdb"},
     {:fixture_enterprise, "GeoIP2-Enterprise-Test.mmdb"},
-    {:fixture_isp, "GeoIP2-ISP-Test.mmdb"},
-    {:fixture_broken_pointers, "MaxMind-DB-test-broken-pointers-24.mmdb"},
-    {:fixture_no_ipv4_search_tree, "MaxMind-DB-no-ipv4-search-tree.mmdb"}
+    {:fixture_isp, "GeoIP2-ISP-Test.mmdb"}
   ]
 
   def download do
