@@ -22,9 +22,7 @@ defmodule Geolix.Adapter.MMDB2.Result do
   @doc """
   Convert raw result map into struct.
   """
-  @spec to_struct(type :: String.t(), data :: map | nil, locale :: atom) :: map
-  def to_struct(_type, nil, _), do: nil
-
+  @spec to_struct(type :: String.t(), data :: map, locale :: atom) :: map
   for {type, model} <- @mapping do
     def to_struct(unquote(type), data, locale) do
       structify(unquote(model), data, locale)
