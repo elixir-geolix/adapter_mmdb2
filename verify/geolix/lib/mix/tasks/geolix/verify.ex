@@ -16,7 +16,7 @@ defmodule Mix.Tasks.Geolix.Verify do
   def run(_args) do
     {:ok, _} = Application.ensure_all_started(:geolix)
     true = wait_until_ready(5000)
-    result_file = @results |> File.open!([:write, :utf8])
+    result_file = File.open!(@results, [:write, :utf8])
 
     @ip_set
     |> File.read!()

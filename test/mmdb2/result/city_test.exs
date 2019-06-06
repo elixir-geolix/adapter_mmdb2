@@ -8,12 +8,12 @@ defmodule Geolix.Adapter.MMDB2.Result.CityTest do
     result = Geolix.lookup("2.125.160.216", where: :fixture_city)
 
     assert %City{} = result
-    assert %Subdivision{} = result.subdivisions |> hd()
+    assert %Subdivision{} = hd(result.subdivisions)
   end
 
   test "locale result" do
     result = Geolix.lookup("2.125.160.216", locale: :fr, where: :fixture_city)
-    subdivision = result.subdivisions |> hd()
+    subdivision = hd(result.subdivisions)
 
     assert result.continent.name == result.continent.names[:fr]
     assert result.country.name == result.country.names[:fr]
@@ -59,7 +59,7 @@ defmodule Geolix.Adapter.MMDB2.Result.CityTest do
 
     assert "CN" == result.registered_country.iso_code
 
-    subdivision = result.subdivisions |> hd()
+    subdivision = hd(result.subdivisions)
 
     assert "22" == subdivision.iso_code
     assert "Jilin Sheng" == subdivision.names[:en]

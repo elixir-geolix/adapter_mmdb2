@@ -41,9 +41,9 @@ defmodule Geolix.Adapter.MMDB2.Result do
 
   defp structify(model, data, locale) do
     result = model.from(data, locale)
-    traits = result.traits |> Map.put(:ip_address, data[:ip_address])
+    traits = Map.put(result.traits, :ip_address, data[:ip_address])
 
-    result |> Map.put(:traits, traits)
+    Map.put(result, :traits, traits)
   end
 
   defp structify_flat(model, data, locale), do: model.from(data, locale)

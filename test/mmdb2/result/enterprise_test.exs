@@ -8,12 +8,12 @@ defmodule Geolix.Adapter.MMDB2.Result.EnterpriseTest do
     result = Geolix.lookup("74.209.24.0", where: :fixture_enterprise)
 
     assert %Enterprise{} = result
-    assert %EnterpriseSubdivision{} = result.subdivisions |> hd()
+    assert %EnterpriseSubdivision{} = hd(result.subdivisions)
   end
 
   test "locale result" do
     result = Geolix.lookup("74.209.24.0", locale: :en, where: :fixture_enterprise)
-    subdivision = result.subdivisions |> hd()
+    subdivision = hd(result.subdivisions)
 
     assert result.continent.name == result.continent.names[:en]
     assert result.country.name == result.country.names[:en]
@@ -43,7 +43,7 @@ defmodule Geolix.Adapter.MMDB2.Result.EnterpriseTest do
     assert 6_255_149 == result.continent.geoname_id
     assert 6_252_001 == result.registered_country.geoname_id
 
-    subdivision = result.subdivisions |> hd()
+    subdivision = hd(result.subdivisions)
 
     assert 11 == result.city.confidence
     assert 99 == result.country.confidence

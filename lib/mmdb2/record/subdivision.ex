@@ -18,7 +18,7 @@ defmodule Geolix.Adapter.MMDB2.Record.Subdivision do
   def from(nil, _), do: nil
 
   def from(data, locale) when is_list(data) do
-    data |> Enum.map(&from(&1, locale))
+    Enum.map(data, &from(&1, locale))
   end
 
   def from(data, nil), do: struct(__MODULE__, data)
