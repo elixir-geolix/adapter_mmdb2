@@ -22,15 +22,8 @@ jobs:
       elixir: 1.8.1
       otp_release: 21.0
       before_install: |-
-        # setup pip for "sudo: false"
-        mkdir -p vendor/python
+        pip install --user --quiet --ignore-installed geoip2
 
-        export PYTHONPATH="${PYTHONPATH}:${TRAVIS_BUILD_DIR}/vendor/python"
-
-        # install python dependencies
-        pip install --target="${TRAVIS_BUILD_DIR}/vendor/python" --ignore-installed geoip2
-
-        # fetch GeoLite2 databases
         mkdir -p data
 
         pushd data
