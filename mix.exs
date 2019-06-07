@@ -60,8 +60,6 @@ defmodule Geolix.Adapter.MMDB2.MixProject do
         :underspecs,
         :unmatched_returns
       ],
-      ignore_warnings: ".dialyzer_ignore.exs",
-      list_unused_filters: true,
       plt_add_apps: [:inets, :mmdb2_decoder]
     ]
   end

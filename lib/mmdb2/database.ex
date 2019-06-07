@@ -22,18 +22,15 @@ defmodule Geolix.Adapter.MMDB2.Database do
 
   defp lookup(ip, data, meta, tree, opts) do
     case MMDB2Decoder.lookup(ip, meta, tree, data) do
-      {:error, _} ->
-        nil
-
-      {:ok, nil} ->
-        nil
-
-      {:ok, result} ->
+      {:ok, result} when is_map(result) ->
         result_as = Keyword.get(opts, :as, :struct)
 
         result
         |> Map.put(:ip_address, ip)
         |> maybe_to_struct(result_as, meta, opts)
+
+      _ ->
+        nil
     end
   end
 
