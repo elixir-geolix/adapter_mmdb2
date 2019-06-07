@@ -7,8 +7,10 @@ defmodule Geolix.Adapter.MMDB2.Database do
   @doc """
   Performs a lookup in a loaded database.
   """
-  @spec lookup(tuple, atom, Keyword.t()) :: map | nil
-  def lookup(ip, where, opts) do
+  @spec lookup(tuple, Keyword.t()) :: map | nil
+  def lookup(ip, opts) do
+    where = Keyword.fetch!(opts, :where)
+
     data = Storage.Data.get(where)
     meta = Storage.Metadata.get(where)
     tree = Storage.Tree.get(where)
