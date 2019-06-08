@@ -24,44 +24,42 @@ defmodule Geolix.Adapter.MMDB2.Reader do
   def read_database(nil), do: {:error, :enoent}
 
   def read_database(filename) do
-    case File.regular?(filename) do
-      true ->
-        filename
-        |> File.read!()
-        |> maybe_gunzip(filename)
-        |> maybe_untar(filename)
-        |> MMDB2Decoder.parse_database()
-
-      false ->
-        {:error, :enoent}
+    if File.regular?(filename) do
+      filename
+      |> File.read!()
+      |> maybe_gunzip(filename)
+      |> maybe_untar(filename)
+      |> MMDB2Decoder.parse_database()
+    else
+      {:error, :enoent}
     end
   end
 
   defp find_mmdb_contents([]), do: nil
 
   defp find_mmdb_contents([{file, contents} | files]) do
-    case String.ends_with?(to_string(file), ".mmdb") do
-      false -> find_mmdb_contents(files)
-      true -> contents
+    if String.ends_with?(to_string(file), ".mmdb") do
+      contents
+    else
+      find_mmdb_contents(files)
     end
   end
 
   defp maybe_untar(data, filename) do
-    case String.ends_with?(filename, [".tar", ".tar.gz"]) do
-      false ->
-        data
+    if String.ends_with?(filename, [".tar", ".tar.gz"]) do
+      {:ok, files} = :erl_tar.extract({:binary, data}, [:memory])
 
-      true ->
-        {:ok, files} = :erl_tar.extract({:binary, data}, [:memory])
-
-        find_mmdb_contents(files)
+      find_mmdb_contents(files)
+    else
+      data
     end
   end
 
   defp maybe_gunzip(data, filename) do
-    case String.ends_with?(filename, ".gz") do
-      false -> data
-      true -> :zlib.gunzip(data)
+    if String.ends_with?(filename, ".gz") do
+      :zlib.gunzip(data)
+    else
+      data
     end
   end
 end
