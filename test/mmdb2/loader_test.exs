@@ -15,8 +15,8 @@ defmodule Geolix.Adapter.MMDB2.Database.LoaderTest do
   end
 
   test "reloading a database" do
-    path_city = Path.join([@fixture_path, "GeoIP2-City-Test.mmdb"])
-    path_country = Path.join([@fixture_path, "GeoIP2-Country-Test.mmdb"])
+    path_city = Path.join(@fixture_path, "GeoIP2-City-Test.mmdb")
+    path_country = Path.join(@fixture_path, "GeoIP2-Country-Test.mmdb")
 
     db_city = %{id: :reload, adapter: MMDB2, source: path_city}
     db_country = %{id: :reload, adapter: MMDB2, source: path_country}
@@ -29,7 +29,7 @@ defmodule Geolix.Adapter.MMDB2.Database.LoaderTest do
   end
 
   test "system environment configuration" do
-    path = Path.join([@fixture_path, "GeoIP2-City-Test.mmdb"])
+    path = Path.join(@fixture_path, "GeoIP2-City-Test.mmdb")
     var = "GEOLIX_TEST_DATABASE_PATH"
     db = %{id: :system_env, adapter: MMDB2, source: {:system, var}}
 
@@ -43,7 +43,7 @@ defmodule Geolix.Adapter.MMDB2.Database.LoaderTest do
   end
 
   test "system environment configuration (default value)" do
-    path = Path.join([@fixture_path, "GeoIP2-City-Test.mmdb"])
+    path = Path.join(@fixture_path, "GeoIP2-City-Test.mmdb")
     var = "GEOLIX_TEST_DATABASE_PATH"
     db = %{id: :system_env_default, adapter: MMDB2, source: {:system, var, path}}
 

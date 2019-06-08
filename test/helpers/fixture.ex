@@ -3,7 +3,7 @@ defmodule Geolix.Adapter.MMDB2TestHelpers.Fixture do
 
   alias Geolix.TestData.MMDB2Fixture
 
-  @path Path.join([__DIR__, "../fixtures"])
+  @path Path.expand("../fixtures", __DIR__)
   @fixtures [
     {:fixture_anonymous, "GeoIP2-Anonymous-IP-Test.mmdb"},
     {:fixture_asn, "GeoLite2-ASN-Test.mmdb"},
