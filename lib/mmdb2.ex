@@ -1,6 +1,20 @@
 defmodule Geolix.Adapter.MMDB2 do
   @moduledoc """
   Adapter for Geolix to work with MMDB2 databases.
+
+  ## Adapter Configuration
+
+  To start using the adapter with a compatible database you need to add the
+  required configuration entry to your `:geolix` configuration:
+
+      config :geolix,
+        databases: [
+          %{
+            id: :my_mmdb_database,
+            adapter: Geolix.Adapter.MMDB2,
+            source: "/absolute/path/to/my/database.mmdb"
+          }
+        ]
   """
 
   alias Geolix.Adapter.MMDB2.Database
