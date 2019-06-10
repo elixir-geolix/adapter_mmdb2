@@ -15,6 +15,20 @@ defmodule Geolix.Adapter.MMDB2 do
             source: "/absolute/path/to/my/database.mmdb"
           }
         ]
+
+  ## Database Configuration
+
+  In order to work this adapter requires a `:source` configuration value to
+  point to a valid MMDB2 format database.
+
+  ### Compressed Databases
+
+  Some limited support is built in to allow working with compressed databases
+  if the filename matches one of the following patterns:
+
+  - `*.gz` - It is expected to be a `gzip` compressed file
+  - `*.tar` - It is expected to be a tarball and the first file in the archive ending in `.mmdb` will be loaded.
+  - `*.tar.gz` - Combination of the above
   """
 
   alias Geolix.Adapter.MMDB2.Database
