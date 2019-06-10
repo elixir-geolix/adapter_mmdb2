@@ -66,6 +66,31 @@ defmodule Geolix.Adapter.MMDB2.MixProject do
 
   defp docs do
     [
+      groups_for_modules: [
+        "Result Structs (Databases)": [
+          Geolix.Adapter.MMDB2.Result.ASN,
+          Geolix.Adapter.MMDB2.Result.AnonymousIP,
+          Geolix.Adapter.MMDB2.Result.City,
+          Geolix.Adapter.MMDB2.Result.ConnectionType,
+          Geolix.Adapter.MMDB2.Result.Country,
+          Geolix.Adapter.MMDB2.Result.Domain,
+          Geolix.Adapter.MMDB2.Result.Enterprise,
+          Geolix.Adapter.MMDB2.Result.ISP
+        ],
+        "Result Structs (Records)": [
+          Geolix.Adapter.MMDB2.Record.City,
+          Geolix.Adapter.MMDB2.Record.Continent,
+          Geolix.Adapter.MMDB2.Record.Country,
+          Geolix.Adapter.MMDB2.Record.EnterpriseCity,
+          Geolix.Adapter.MMDB2.Record.EnterpriseCountry,
+          Geolix.Adapter.MMDB2.Record.EnterprisePostal,
+          Geolix.Adapter.MMDB2.Record.EnterpriseSubdivision,
+          Geolix.Adapter.MMDB2.Record.Location,
+          Geolix.Adapter.MMDB2.Record.Postal,
+          Geolix.Adapter.MMDB2.Record.RepresentedCountry,
+          Geolix.Adapter.MMDB2.Record.Subdivision
+        ]
+      ],
       main: "Geolix.Adapter.MMDB2",
       source_ref: "master",
       source_url: @url_github
