@@ -52,7 +52,7 @@ defmodule Geolix.Adapter.MMDB2 do
   def load_database(database), do: Loader.load_database(database)
 
   @impl Geolix.Adapter
-  def lookup(ip, opts), do: Database.lookup(ip, opts)
+  def lookup(ip, opts, database), do: Database.lookup(ip, opts, database)
 
   @impl Geolix.Adapter
   def unload_database(database), do: Loader.unload_database(database)
