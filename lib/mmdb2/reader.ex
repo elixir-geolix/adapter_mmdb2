@@ -24,14 +24,16 @@ defmodule Geolix.Adapter.MMDB2.Reader do
   def read_database(nil), do: {:error, :enoent}
 
   def read_database(filename) do
-    if File.regular?(filename) do
-      filename
-      |> File.read!()
-      |> maybe_gunzip(filename)
-      |> maybe_untar(filename)
-      |> MMDB2Decoder.parse_database()
-    else
-      {:error, :enoent}
+    case File.stat(filename) do
+      {:ok, _} ->
+        filename
+        |> File.read!()
+        |> maybe_gunzip(filename)
+        |> maybe_untar(filename)
+        |> MMDB2Decoder.parse_database()
+
+      error ->
+        error
     end
   end
 
