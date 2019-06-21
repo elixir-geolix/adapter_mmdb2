@@ -7,6 +7,7 @@ defmodule Geolix.Adapter.MMDB2.Loader do
   alias Geolix.Adapter.MMDB2.Storage
 
   @type database :: %{
+          required(:id) => atom,
           required(:source) => binary | {:system, binary} | {:system, binary, binary}
         }
 
@@ -41,6 +42,7 @@ defmodule Geolix.Adapter.MMDB2.Loader do
   @doc """
   Removes a database from storage.
   """
+  @spec unload_database(database) :: :ok
   def unload_database(database), do: store_data({:ok, nil, nil, nil}, database)
 
   defp store_data({:error, :enoent} = error, %{id: id, source: source}) do
