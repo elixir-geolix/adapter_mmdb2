@@ -38,7 +38,7 @@ defmodule Geolix.Adapter.MMDB2 do
   @behaviour Geolix.Adapter
 
   @impl Geolix.Adapter
-  def database_workers do
+  def database_workers(_database) do
     import Supervisor.Spec
 
     [
