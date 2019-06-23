@@ -1,39 +1,12 @@
 defmodule Geolix.Adapter.MMDB2.Benchmark.Lookup do
   def run do
-    database = determine_database()
+    :ok =
+      Geolix.load_database(%{
+        id: :benchmark,
+        adapter: Geolix.Adapter.MMDB2,
+        source: Geolix.TestData.file(:mmdb2, "Benchmark.mmdb")
+      })
 
-    case File.exists?(database) do
-      true ->
-        {:ok, _} = Application.ensure_all_started(:geolix)
-
-        :ok =
-          Geolix.load_database(%{
-            id: :benchmark,
-            adapter: Geolix.Adapter.MMDB2,
-            source: database
-          })
-
-        IO.puts("Using database at #{database}\n")
-        run_benchmark()
-
-      false ->
-        IO.warn("Expected database not found at #{database}")
-    end
-  end
-
-  defp determine_database do
-    case System.argv() do
-      [] ->
-        [Geolix.TestData.dir(:mmdb2), "Benchmark.mmdb"]
-        |> Path.join()
-        |> Path.expand()
-
-      [path] ->
-        Path.expand(path)
-    end
-  end
-
-  defp run_benchmark do
     {:ok, lookup_ipv4} = :inet.parse_address('1.1.1.1')
     {:ok, lookup_ipv4_in_ipv6} = :inet.parse_address('::1.1.1.1')
 

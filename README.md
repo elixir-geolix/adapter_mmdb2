@@ -40,13 +40,7 @@ config :geolix,
 
 ## Benchmark
 
-A (minimal) benchmark script looking up a predefined ip address is included:
-
-```shell
-mix bench.lookup
-```
-
-By default the benchmark uses the `Benchmark.mmdb` database provided by `:geolix_testdata`. To use a different database pass it's path as the sole argument to the `mix bench.lookup` call.
+A (minimal) benchmark script is included. Please refer to the Mixfile or `mix help` output for the name.
 
 ## License
 
