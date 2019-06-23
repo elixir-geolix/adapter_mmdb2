@@ -9,18 +9,16 @@ defmodule Geolix.Adapter.MMDB2.Database do
   """
   @spec lookup(tuple, Keyword.t(), map) :: map | nil
   def lookup(ip, opts, %{id: id}) do
-    data = Storage.Data.get(id)
-    meta = Storage.Metadata.get(id)
-    tree = Storage.Tree.get(id)
+    case Storage.get(id) do
+      {meta, tree, data} when is_map(meta) and is_binary(tree) and is_binary(data) ->
+        lookup(ip, meta, tree, data, opts)
 
-    lookup(ip, data, meta, tree, opts)
+      _ ->
+        nil
+    end
   end
 
-  defp lookup(_, nil, _, _, _), do: nil
-  defp lookup(_, _, nil, _, _), do: nil
-  defp lookup(_, _, _, nil, _), do: nil
-
-  defp lookup(ip, data, meta, tree, opts) do
+  defp lookup(ip, meta, tree, data, opts) do
     case MMDB2Decoder.lookup(ip, meta, tree, data) do
       {:ok, result} when is_map(result) ->
         result_as = Keyword.get(opts, :as, :struct)

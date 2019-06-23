@@ -82,10 +82,6 @@ defmodule Geolix.Adapter.MMDB2.Loader do
   end
 
   defp store_data({:ok, meta, tree, data}, %{id: id}) do
-    Storage.Data.set(id, data)
-    Storage.Metadata.set(id, meta)
-    Storage.Tree.set(id, tree)
-
-    :ok
+    Storage.set(id, {meta, tree, data})
   end
 end

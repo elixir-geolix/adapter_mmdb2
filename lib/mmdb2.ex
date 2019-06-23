@@ -41,11 +41,7 @@ defmodule Geolix.Adapter.MMDB2 do
   def database_workers(_database) do
     import Supervisor.Spec
 
-    [
-      worker(Storage.Data, []),
-      worker(Storage.Metadata, []),
-      worker(Storage.Tree, [])
-    ]
+    [worker(Storage, [])]
   end
 
   @impl Geolix.Adapter
