@@ -3,6 +3,7 @@ defmodule Geolix.Adapter.MMDB2.Database do
 
   alias Geolix.Adapter.MMDB2.Result
   alias Geolix.Adapter.MMDB2.Storage
+  alias MMDB2Decoder.Metadata
 
   @doc """
   Performs a lookup in a loaded database.
@@ -12,6 +13,20 @@ defmodule Geolix.Adapter.MMDB2.Database do
     case Storage.get(id) do
       {meta, tree, data} when is_map(meta) and is_binary(tree) and is_binary(data) ->
         lookup(ip, meta, tree, data, opts)
+
+      _ ->
+        nil
+    end
+  end
+
+  @doc """
+  Returns the metadata for a loaded database.
+  """
+  @spec metadata(%{id: atom}) :: Metadata.t() | nil
+  def metadata(%{id: id}) do
+    case Storage.get(id) do
+      {meta, _, _} when is_map(meta) ->
+        meta
 
       _ ->
         nil
