@@ -47,5 +47,8 @@ defmodule Geolix.Adapter.MMDB2 do
   def lookup(ip, opts, database), do: Database.lookup(ip, opts, database)
 
   @impl Geolix.Adapter
+  def metadata(database), do: Database.metadata(database)
+
+  @impl Geolix.Adapter
   def unload_database(database), do: Loader.unload_database(database)
 end
