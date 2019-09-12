@@ -1,6 +1,6 @@
 # Changelog
 
-# v0.1.0 (2019-09-08)
+## v0.1.0 (2019-09-08)
 
 - Initial separation from [:geolix](https://github.com/elixir-geolix/geolix)
 
