@@ -1,4 +1,4 @@
-defmodule Geolix.Adapter.MMDB2.Database.LoaderErrorTest do
+defmodule Geolix.Adapter.MMDB2.LoaderErrorTest do
   use ExUnit.Case, async: false
 
   import ExUnit.CaptureLog
