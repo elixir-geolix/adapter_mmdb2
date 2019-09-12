@@ -16,6 +16,9 @@ defmodule Geolix.Adapter.MMDB2.Reader do
         |> maybe_untar(filename)
         |> MMDB2Decoder.parse_database()
 
+      {:ok, {{_, status, _}, _, _}} ->
+        {:error, {:remote, {:status, status}}}
+
       {:error, err} ->
         {:error, {:remote, err}}
     end
