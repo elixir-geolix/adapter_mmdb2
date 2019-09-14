@@ -1,11 +1,13 @@
 defmodule Geolix.Adapter.MMDB2.Storage do
   @moduledoc false
 
-  use Agent
+  use GenServer
 
   alias MMDB2Decoder.Metadata
 
   @type storage_entry :: {Metadata.t() | nil, binary | nil, binary | nil}
+
+  @ets_table_opts [:named_table, :protected, :set, read_concurrency: true]
 
   @doc """
   Returns the worker specification for a database storage process.
@@ -18,9 +20,21 @@ defmodule Geolix.Adapter.MMDB2.Storage do
   end
 
   @doc false
-  @spec start_link(atom) :: Agent.on_start()
   def start_link(storage_id) do
-    Agent.start_link(fn -> nil end, name: storage_id)
+    GenServer.start_link(__MODULE__, storage_id, name: storage_id)
+  end
+
+  @doc false
+  def init(storage_id) do
+    :ok = create_ets_table(storage_id)
+
+    {:ok, storage_id}
+  end
+
+  def handle_call({:set, entry}, _from, storage_id) do
+    true = :ets.insert(storage_id, {:data, entry})
+
+    {:reply, :ok, storage_id}
   end
 
   @doc """
@@ -28,9 +42,18 @@ defmodule Geolix.Adapter.MMDB2.Storage do
   """
   @spec get(atom) :: storage_entry | nil
   def get(database_id) do
-    database_id
-    |> storage_id()
-    |> Agent.get(fn entry -> entry end)
+    storage_id = storage_id(database_id)
+
+    case :ets.info(storage_id) do
+      :undefined ->
+        nil
+
+      _ ->
+        case :ets.lookup(storage_id, :data) do
+          [{:data, entry}] -> entry
+          _ -> nil
+        end
+    end
   end
 
   @doc """
@@ -40,7 +63,18 @@ defmodule Geolix.Adapter.MMDB2.Storage do
   def set(database_id, entry) do
     database_id
     |> storage_id()
-    |> Agent.update(fn _ -> entry end)
+    |> GenServer.call({:set, entry})
+  end
+
+  defp create_ets_table(storage_id) do
+    case :ets.info(storage_id) do
+      :undefined ->
+        _ = :ets.new(storage_id, @ets_table_opts)
+        :ok
+
+      _ ->
+        :ok
+    end
   end
 
   defp storage_id(database_id), do: :"geolix_mmdb2_storage_#{database_id}"

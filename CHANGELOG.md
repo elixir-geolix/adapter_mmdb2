@@ -2,6 +2,9 @@
 
 ## v0.2.0-dev
 
+- Enhancements
+    - Databases are now stored in ets tables instead of Agent processes
+
 - Bug fixes
     - Receiving a non 200 response from a remote database will now log an error instead of crashing ([elixir-geolix/geolix#28](https://github.com/elixir-geolix/geolix/issues/28))
 
