@@ -12,15 +12,15 @@ defmodule Geolix.Adapter.MMDB2.Storage do
   """
   @spec worker(atom) :: Supervisor.Spec.spec()
   def worker(database_id) do
-    worker_id = worker_id(database_id)
+    storage_id = storage_id(database_id)
 
-    Supervisor.Spec.worker(__MODULE__, [worker_id], id: worker_id)
+    Supervisor.Spec.worker(__MODULE__, [storage_id], id: storage_id)
   end
 
   @doc false
   @spec start_link(atom) :: Agent.on_start()
-  def start_link(worker_id) do
-    Agent.start_link(fn -> nil end, name: worker_id)
+  def start_link(storage_id) do
+    Agent.start_link(fn -> nil end, name: storage_id)
   end
 
   @doc """
@@ -29,7 +29,7 @@ defmodule Geolix.Adapter.MMDB2.Storage do
   @spec get(atom) :: storage_entry | nil
   def get(database_id) do
     database_id
-    |> worker_id()
+    |> storage_id()
     |> Agent.get(fn entry -> entry end)
   end
 
@@ -39,9 +39,9 @@ defmodule Geolix.Adapter.MMDB2.Storage do
   @spec set(atom, storage_entry) :: :ok
   def set(database_id, entry) do
     database_id
-    |> worker_id()
+    |> storage_id()
     |> Agent.update(fn _ -> entry end)
   end
 
-  defp worker_id(database_id), do: :"geolix_mmdb2_storage_#{database_id}"
+  defp storage_id(database_id), do: :"geolix_mmdb2_storage_#{database_id}"
 end
