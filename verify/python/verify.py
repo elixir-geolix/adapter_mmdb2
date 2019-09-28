@@ -4,7 +4,7 @@ import io
 asn     = geoip2.database.Reader('../../data/GeoLite2-ASN.mmdb')
 city    = geoip2.database.Reader('../../data/GeoLite2-City.mmdb')
 country = geoip2.database.Reader('../../data/GeoLite2-Country.mmdb')
-ips     = file('../ip_set.txt', 'r')
+ips     = io.open('../ip_set.txt', mode='r')
 results = io.open('../python_results.txt', mode='w', encoding='utf-8')
 
 for ip in ips:
