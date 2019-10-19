@@ -1,6 +1,6 @@
 # Changelog
 
-## v0.2.0-dev
+## v0.2.0 (2019-10-19)
 
 - Enhancements
     - Databases are now stored in ets tables instead of Agent processes

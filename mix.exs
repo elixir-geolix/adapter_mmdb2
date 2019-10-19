@@ -7,7 +7,7 @@ defmodule Geolix.Adapter.MMDB2.MixProject do
     [
       app: :geolix_adapter_mmdb2,
       name: "Geolix Adapter: MMDB2",
-      version: "0.2.0-dev",
+      version: "0.2.0",
       elixir: "~> 1.5",
       aliases: aliases(),
       deps: deps(),
@@ -92,7 +92,7 @@ defmodule Geolix.Adapter.MMDB2.MixProject do
         ]
       ],
       main: "Geolix.Adapter.MMDB2",
-      source_ref: "master",
+      source_ref: "v0.2.0",
       source_url: @url_github
     ]
   end
