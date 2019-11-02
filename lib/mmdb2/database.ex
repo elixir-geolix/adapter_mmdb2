@@ -5,6 +5,8 @@ defmodule Geolix.Adapter.MMDB2.Database do
   alias Geolix.Adapter.MMDB2.Storage
   alias MMDB2Decoder.Metadata
 
+  @mmdb2_opts [double_precision: 8, float_precision: 4, map_keys: :atoms]
+
   @doc """
   Performs a lookup in a loaded database.
   """
@@ -34,7 +36,7 @@ defmodule Geolix.Adapter.MMDB2.Database do
   end
 
   defp lookup(ip, meta, tree, data, opts) do
-    case MMDB2Decoder.lookup(ip, meta, tree, data) do
+    case MMDB2Decoder.lookup(ip, meta, tree, data, @mmdb2_opts) do
       {:ok, result} when is_map(result) ->
         result_as = Keyword.get(opts, :as, :struct)
 
