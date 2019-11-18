@@ -10,7 +10,7 @@ defmodule Geolix.Adapter.MMDB2.Database do
   @doc """
   Performs a lookup in a loaded database.
   """
-  @spec lookup(tuple, Keyword.t(), map) :: map | nil
+  @spec lookup(:inet.ip_address(), Keyword.t(), %{id: atom}) :: map | nil
   def lookup(ip, opts, %{id: id}) do
     case Storage.get(id) do
       {meta, tree, data} when is_map(meta) and is_binary(tree) and is_binary(data) ->
