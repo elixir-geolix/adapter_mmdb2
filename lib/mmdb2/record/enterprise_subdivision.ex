@@ -15,12 +15,11 @@ defmodule Geolix.Adapter.MMDB2.Record.EnterpriseSubdivision do
 
   @impl Model
   def from(nil, _), do: nil
+  def from(data, nil), do: struct(__MODULE__, data)
 
   def from(data, locale) when is_list(data) do
     Enum.map(data, &from(&1, locale))
   end
-
-  def from(data, nil), do: struct(__MODULE__, data)
 
   def from(data, locale) do
     result = from(data, nil)

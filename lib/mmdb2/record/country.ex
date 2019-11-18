@@ -7,20 +7,17 @@ defmodule Geolix.Adapter.MMDB2.Record.Country do
 
   defstruct [
     :geoname_id,
-    :is_in_european_union,
     :iso_code,
     :name,
-    :names
+    :names,
+    is_in_european_union: false
   ]
 
   @behaviour Model
 
   @impl Model
   def from(nil, _), do: nil
-
-  def from(data, nil) do
-    struct(__MODULE__, Map.put_new(data, :is_in_european_union, false))
-  end
+  def from(data, nil), do: struct(__MODULE__, data)
 
   def from(data, locale) do
     result = from(data, nil)
