@@ -44,16 +44,12 @@ defmodule Geolix.Adapter.MMDB2.Storage do
   def get(database_id) do
     storage_id = storage_id(database_id)
 
-    case :ets.info(storage_id) do
-      :undefined ->
-        nil
-
-      _ ->
-        case :ets.lookup(storage_id, :data) do
-          [{:data, entry}] -> entry
-          _ -> nil
-        end
+    case :ets.lookup(storage_id, :data) do
+      [{:data, entry}] -> entry
+      _ -> nil
     end
+  rescue
+    _ -> nil
   end
 
   @doc """
