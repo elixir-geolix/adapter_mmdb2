@@ -2,6 +2,9 @@
 
 ## v0.3.0-dev
 
+- Bug fixes
+    - `:mmdb2_decoder` has been moved from `:included_applications` to `:applications` to avoid potential problems with release tooling ([elixir-geolix/geolix#24](https://github.com/elixir-geolix/geolix/issues/24))
+
 - Backwards incompatible changes
     - Minimum required elixir version is now `~> 1.7`
     - `:mmdb2_decoder` has been updated to `~> 2.0`
