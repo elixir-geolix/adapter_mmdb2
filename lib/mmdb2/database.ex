@@ -5,7 +5,7 @@ defmodule Geolix.Adapter.MMDB2.Database do
   alias Geolix.Adapter.MMDB2.Storage
   alias MMDB2Decoder.Metadata
 
-  @mmdb2_opts [double_precision: 8, float_precision: 4, map_keys: :atoms]
+  @mmdb2_opts %{double_precision: 8, float_precision: 4, map_keys: :atoms}
 
   @doc """
   Performs a lookup in a loaded database.

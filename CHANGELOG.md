@@ -7,7 +7,7 @@
 
 - Backwards incompatible changes
     - Minimum required elixir version is now `~> 1.7`
-    - `:mmdb2_decoder` has been updated to `~> 2.0`
+    - `:mmdb2_decoder` has been updated to `~> 2.1`
         - As a result the database descriptions in `MMDB2Decoder.Metadata` are now always a map with binary keys instead of atom keys
 
 ## v0.2.0 (2019-10-19)
