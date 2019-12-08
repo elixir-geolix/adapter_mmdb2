@@ -13,7 +13,7 @@ defmodule Geolix.Adapter.MMDB2.Database do
   @spec lookup(:inet.ip_address(), Keyword.t(), %{id: atom}) :: map | nil
   def lookup(ip, opts, %{id: id}) do
     case Storage.get(id) do
-      {meta, tree, data} when is_map(meta) and is_binary(tree) and is_binary(data) ->
+      {%Metadata{} = meta, tree, data} when is_binary(tree) and is_binary(data) ->
         lookup(ip, meta, tree, data, opts)
 
       _ ->
@@ -27,11 +27,8 @@ defmodule Geolix.Adapter.MMDB2.Database do
   @spec metadata(%{id: atom}) :: Metadata.t() | nil
   def metadata(%{id: id}) do
     case Storage.get(id) do
-      {meta, _, _} when is_map(meta) ->
-        meta
-
-      _ ->
-        nil
+      {%Metadata{} = meta, _, _} -> meta
+      _ -> nil
     end
   end
 
