@@ -59,7 +59,7 @@ defmodule Geolix.Adapter.MMDB2.MixProject do
         :underspecs,
         :unmatched_returns
       ],
-      plt_add_apps: [:inets, :mmdb2_decoder]
+      plt_add_apps: [:inets]
     ]
   end
 
