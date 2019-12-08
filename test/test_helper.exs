@@ -5,6 +5,19 @@ alias Geolix.Adapter.MMDB2TestHelpers.Fixture
 
 Fixture.download()
 
+fixtures =
+  Fixture.list()
+  |> Enum.map(fn
+    {id, filename, :autoload} ->
+      source = Path.join([__DIR__, "fixtures", filename])
+
+      %{id: id, adapter: MMDB2, source: source}
+
+    _ ->
+      nil
+  end)
+  |> Enum.reject(&(&1 == nil))
+
 databases =
   [
     %{
@@ -27,12 +40,7 @@ databases =
       adapter: MMDB2,
       source: Path.join(Geolix.TestData.dir(:mmdb2), "Geolix.mmdb.tar.gz")
     }
-  ] ++
-    Enum.map(Fixture.list(), fn {id, filename} ->
-      source = Path.join([__DIR__, "fixtures", filename])
-
-      %{id: id, adapter: MMDB2, source: source}
-    end)
+  ] ++ fixtures
 
 Application.put_env(:geolix, :databases, databases)
 Enum.each(databases, &Geolix.load_database/1)

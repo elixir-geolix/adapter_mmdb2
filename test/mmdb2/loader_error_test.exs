@@ -5,6 +5,8 @@ defmodule Geolix.Adapter.MMDB2.LoaderErrorTest do
 
   alias Geolix.Adapter.MMDB2
 
+  @fixture_path Path.expand("../fixtures", __DIR__)
+
   test "error if database contains no metadata" do
     db = %{id: :nometa_database, adapter: MMDB2, source: __ENV__.file}
 
@@ -36,5 +38,20 @@ defmodule Geolix.Adapter.MMDB2.LoaderErrorTest do
       end)
 
     assert log =~ "Failed to read remote for database :notremote_database"
+  end
+
+  test "database with other error returned from reader" do
+    db = %{
+      id: :invalidnodecount_database,
+      adapter: MMDB2,
+      source: Path.join([@fixture_path, "GeoIP2-City-Test-Invalid-Node-Count.mmdb"])
+    }
+
+    log =
+      capture_log(fn ->
+        assert {:error, :invalid_node_count} = Geolix.load_database(db)
+      end)
+
+    assert log =~ "Failed to load database :invalidnodecount_database"
   end
 end
