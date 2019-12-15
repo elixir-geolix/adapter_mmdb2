@@ -1,6 +1,6 @@
 # Changelog
 
-## v0.3.0-dev
+## v0.3.0 (2019-12-15)
 
 - Bug fixes
     - `:mmdb2_decoder` has been moved from `:included_applications` to `:applications` to avoid potential problems with release tooling ([elixir-geolix/geolix#24](https://github.com/elixir-geolix/geolix/issues/24))
