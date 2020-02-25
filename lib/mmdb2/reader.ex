@@ -56,10 +56,8 @@ defmodule Geolix.Adapter.MMDB2.Reader do
   end
 
   defp maybe_gunzip(data) do
-    try do
-      :zlib.gunzip(data)
-    rescue
-      _ -> data
-    end
+    :zlib.gunzip(data)
+  rescue
+    _ -> data
   end
 end
