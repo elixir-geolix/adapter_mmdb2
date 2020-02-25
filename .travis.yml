@@ -23,9 +23,9 @@ jobs:
         mkdir -p data
 
         pushd data
-          wget -q "http://geolite.maxmind.com/download/geoip/database/GeoLite2-ASN.tar.gz"
-          wget -q "http://geolite.maxmind.com/download/geoip/database/GeoLite2-City.tar.gz"
-          wget -q "http://geolite.maxmind.com/download/geoip/database/GeoLite2-Country.tar.gz"
+          curl -s "https://download.maxmind.com/app/geoip_download?edition_id=GeoLite2-ASN&license_key=${MAXMIND_LICENSE_KEY}&suffix=tar.gz" -o GeoLite2-ASN.tar.gz
+          curl -s "https://download.maxmind.com/app/geoip_download?edition_id=GeoLite2-City&license_key=${MAXMIND_LICENSE_KEY}&suffix=tar.gz" -o GeoLite2-City.tar.gz
+          curl -s "https://download.maxmind.com/app/geoip_download?edition_id=GeoLite2-Country&license_key=${MAXMIND_LICENSE_KEY}&suffix=tar.gz" -o GeoLite2-Country.tar.gz
 
           tar -xzf GeoLite2-ASN.tar.gz
           tar -xzf GeoLite2-City.tar.gz
