@@ -12,8 +12,8 @@ defmodule Geolix.Adapter.MMDB2.Reader do
       {:ok, {{_, 200, _}, _, body}} ->
         body
         |> IO.iodata_to_binary()
-        |> maybe_gunzip(filename)
-        |> maybe_untar(filename)
+        |> maybe_gunzip()
+        |> maybe_untar()
         |> MMDB2Decoder.parse_database()
 
       {:ok, {{_, status, _}, _, _}} ->
@@ -29,8 +29,8 @@ defmodule Geolix.Adapter.MMDB2.Reader do
       {:ok, _} ->
         filename
         |> File.read!()
-        |> maybe_gunzip(filename)
-        |> maybe_untar(filename)
+        |> maybe_gunzip()
+        |> maybe_untar()
         |> MMDB2Decoder.parse_database()
 
       error ->
@@ -48,21 +48,18 @@ defmodule Geolix.Adapter.MMDB2.Reader do
     end
   end
 
-  defp maybe_untar(data, filename) do
-    if String.ends_with?(filename, [".tar", ".tar.gz"]) do
-      {:ok, files} = :erl_tar.extract({:binary, data}, [:memory])
-
-      find_mmdb_contents(files)
-    else
-      data
+  defp maybe_untar(data) do
+    case :erl_tar.extract({:binary, data}, [:memory]) do
+      {:ok, files} -> find_mmdb_contents(files)
+      {:error, _} -> data
     end
   end
 
-  defp maybe_gunzip(data, filename) do
-    if String.ends_with?(filename, ".gz") do
+  defp maybe_gunzip(data) do
+    try do
       :zlib.gunzip(data)
-    else
-      data
+    rescue
+      _ -> data
     end
   end
 end
