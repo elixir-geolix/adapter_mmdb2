@@ -46,37 +46,25 @@ defmodule Geolix.Adapter.MMDB2.Loader do
   def unload_database(database), do: store_data({:ok, nil, nil, nil}, database)
 
   defp store_data({:error, :enoent} = error, %{id: id, source: source}) do
-    _ =
-      Logger.info(fn ->
-        "Source for database #{inspect(id)} not found: #{inspect(source)}"
-      end)
+    _ = Logger.info("Source for database #{inspect(id)} not found: #{inspect(source)}")
 
     error
   end
 
   defp store_data({:error, :no_metadata} = error, %{id: id}) do
-    _ =
-      Logger.info(fn ->
-        "Failed to read metadata for database #{inspect(id)}"
-      end)
+    _ = Logger.info("Failed to read metadata for database #{inspect(id)}")
 
     error
   end
 
   defp store_data({:error, {:remote, reason}} = error, %{id: id}) do
-    _ =
-      Logger.info(fn ->
-        "Failed to read remote for database #{inspect(id)}: #{inspect(reason)}"
-      end)
+    _ = Logger.info("Failed to read remote for database #{inspect(id)}: #{inspect(reason)}")
 
     error
   end
 
   defp store_data({:error, reason} = error, %{id: id}) do
-    _ =
-      Logger.info(fn ->
-        "Failed to load database #{inspect(id)}: #{inspect(reason)}"
-      end)
+    _ = Logger.info("Failed to load database #{inspect(id)}: #{inspect(reason)}")
 
     error
   end
