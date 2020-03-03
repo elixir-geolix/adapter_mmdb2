@@ -1,5 +1,10 @@
 # Changelog
 
+## v0.4.0-dev
+
+- Enhancements
+    - Database files are always passed to `untar` and `unzip` to support the changed MaxMind download URLs ([#2](https://github.com/elixir-geolix/adapter_mmdb2/pull/2))
+
 ## v0.3.0 (2019-12-15)
 
 - Bug fixes
