@@ -46,7 +46,7 @@ defmodule Geolix.Adapter.MMDB2.MixProject do
       {:ex_doc, ">= 0.0.0", only: :dev, runtime: false},
       {:excoveralls, "~> 0.12", only: :test, runtime: false},
       {:geolix, "~> 1.0"},
-      {:geolix_testdata, "~> 0.4.0", only: [:bench, :test], runtime: false},
+      {:geolix_testdata, "~> 0.5.0", only: [:bench, :test], runtime: false},
       {:mmdb2_decoder, "~> 2.1"}
     ]
   end
