@@ -23,4 +23,5 @@ defmodule Geolix.Adapter.MMDB2TestHelpers.Fixture do
   end
 
   def list, do: @fixtures
+  def path, do: @path
 end

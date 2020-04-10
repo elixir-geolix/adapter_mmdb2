@@ -4,8 +4,7 @@ defmodule Geolix.Adapter.MMDB2.LoaderErrorTest do
   import ExUnit.CaptureLog
 
   alias Geolix.Adapter.MMDB2
-
-  @fixture_path Path.expand("../fixtures", __DIR__)
+  alias Geolix.Adapter.MMDB2TestHelpers.Fixture
 
   test "error if database contains no metadata" do
     db = %{id: :nometa_database, adapter: MMDB2, source: __ENV__.file}
@@ -44,7 +43,7 @@ defmodule Geolix.Adapter.MMDB2.LoaderErrorTest do
     db = %{
       id: :invalidnodecount_database,
       adapter: MMDB2,
-      source: Path.join([@fixture_path, "GeoIP2-City-Test-Invalid-Node-Count.mmdb"])
+      source: Path.join(Fixture.path(), "GeoIP2-City-Test-Invalid-Node-Count.mmdb")
     }
 
     log =
