@@ -11,7 +11,7 @@
     - `:mmdb2_decoder` has been moved from `:included_applications` to `:applications` to avoid potential problems with release tooling ([elixir-geolix/geolix#24](https://github.com/elixir-geolix/geolix/issues/24))
 
 - Backwards incompatible changes
-    - Minimum required elixir version is now `~> 1.7`
+    - Minimum required Elixir version is now `~> 1.7`
     - `:mmdb2_decoder` has been updated to `~> 2.1`
         - As a result the database descriptions in `MMDB2Decoder.Metadata` are now always a map with binary keys instead of atom keys
 
