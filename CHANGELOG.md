@@ -1,5 +1,10 @@
 # Changelog
 
+## v0.5.0-dev
+
+- Enhancements
+    - Usage of `Supervisor` functions becoming deprecated in Elixir `1.11.0` has been removed
+
 ## v0.4.0 (2020-04-12)
 
 - Enhancements

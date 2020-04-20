@@ -38,7 +38,7 @@ defmodule Geolix.Adapter.MMDB2 do
   @behaviour Geolix.Adapter
 
   @impl Geolix.Adapter
-  def database_workers(%{id: database_id}), do: [Storage.worker(database_id)]
+  def database_workers(%{id: database_id}), do: [Storage.child_spec(database_id)]
 
   @impl Geolix.Adapter
   def load_database(database), do: Loader.load_database(database)

@@ -9,14 +9,14 @@ defmodule Geolix.Adapter.MMDB2.Storage do
 
   @ets_table_opts [:named_table, :protected, :set, read_concurrency: true]
 
-  @doc """
-  Returns the worker specification for a database storage process.
-  """
-  @spec worker(atom) :: Supervisor.Spec.spec()
-  def worker(database_id) do
+  @doc false
+  def child_spec(database_id) do
     storage_id = storage_id(database_id)
 
-    Supervisor.Spec.worker(__MODULE__, [storage_id], id: storage_id)
+    %{
+      id: storage_id,
+      start: {__MODULE__, :start_link, [storage_id]}
+    }
   end
 
   @doc false
