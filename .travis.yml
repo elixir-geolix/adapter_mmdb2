@@ -13,12 +13,12 @@ jobs:
       elixir: 1.9.4
       otp_release: 21.3
     - <<: *test
-      elixir: 1.10.2
+      elixir: 1.10.3
       otp_release: 22.0
       after_success: mix coveralls.travis
 
     - stage: verify
-      elixir: 1.10.2
+      elixir: 1.10.3
       otp_release: 22.0
       before_install: |-
         pip install --user --quiet --ignore-installed geoip2
@@ -56,7 +56,7 @@ jobs:
         diff geolix_results.txt python_results.txt
 
     - stage: code quality
-      elixir: 1.10.2
+      elixir: 1.10.3
       otp_release: 22.0
       script:
         - mix format --check-formatted
