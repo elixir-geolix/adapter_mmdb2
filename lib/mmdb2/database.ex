@@ -12,12 +12,16 @@ defmodule Geolix.Adapter.MMDB2.Database do
   """
   @spec lookup(:inet.ip_address(), Keyword.t(), %{id: atom}) :: map | nil
   def lookup(ip, opts, %{id: id}) do
-    case Storage.get(id) do
-      {%Metadata{} = meta, tree, data} when is_binary(tree) and is_binary(data) ->
-        lookup(ip, meta, tree, data, opts)
-
-      _ ->
-        nil
+    with {%Metadata{} = meta, tree, data} when is_binary(tree) and is_binary(data) <-
+           Storage.get(id),
+         {:ok, result} when is_map(result) <-
+           MMDB2Decoder.lookup(ip, meta, tree, data, @mmdb2_opts),
+         result_as <- Keyword.get(opts, :as, :struct) do
+      result
+      |> Map.put(:ip_address, ip)
+      |> maybe_to_struct(result_as, meta, opts)
+    else
+      _ -> nil
     end
   end
 
@@ -29,20 +33,6 @@ defmodule Geolix.Adapter.MMDB2.Database do
     case Storage.get(id) do
       {%Metadata{} = meta, _, _} -> meta
       _ -> nil
-    end
-  end
-
-  defp lookup(ip, meta, tree, data, opts) do
-    case MMDB2Decoder.lookup(ip, meta, tree, data, @mmdb2_opts) do
-      {:ok, result} when is_map(result) ->
-        result_as = Keyword.get(opts, :as, :struct)
-
-        result
-        |> Map.put(:ip_address, ip)
-        |> maybe_to_struct(result_as, meta, opts)
-
-      _ ->
-        nil
     end
   end
 
