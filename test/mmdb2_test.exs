@@ -20,9 +20,9 @@ defmodule Geolix.Adapter.MMDB2Test do
   test "custom mmdb2 decoder options" do
     ip = {1, 1, 1, 1}
 
-    assert %{type: "test"} = Geolix.lookup(ip, as: :raw, where: :testdata_plain)
+    assert %{ip_address: ^ip, type: "test"} = Geolix.lookup(ip, as: :raw, where: :testdata_plain)
 
-    assert %{"type" => "test"} =
+    assert %{"ip_address" => ^ip, "type" => "test"} =
              Geolix.lookup(ip,
                as: :raw,
                where: :testdata_plain,
