@@ -11,11 +11,12 @@ defmodule Geolix.Adapter.MMDB2.Database do
   Performs a lookup in a loaded database.
   """
   @spec lookup(:inet.ip_address(), Keyword.t(), %{id: atom}) :: map | nil
-  def lookup(ip, opts, %{id: id}) do
+  def lookup(ip, opts, %{id: id} = database) do
     with {%Metadata{} = meta, tree, data} when is_binary(tree) and is_binary(data) <-
            Storage.get(id),
+         mmdb2_opts <- mmdb2_opts(database, opts),
          {:ok, result} when is_map(result) <-
-           MMDB2Decoder.lookup(ip, meta, tree, data, @mmdb2_opts),
+           MMDB2Decoder.lookup(ip, meta, tree, data, mmdb2_opts),
          result_as <- Keyword.get(opts, :as, :struct) do
       result
       |> Map.put(:ip_address, ip)
@@ -42,5 +43,9 @@ defmodule Geolix.Adapter.MMDB2.Database do
     locale = Keyword.get(opts, :locale, :en)
 
     Result.to_struct(type, result, locale)
+  end
+
+  defp mmdb2_opts(opts, database) do
+    opts[:mmdb2_decoder_options] || database[:mmdb2_decoder_options] || @mmdb2_opts
   end
 end

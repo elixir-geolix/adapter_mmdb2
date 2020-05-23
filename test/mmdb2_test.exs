@@ -16,4 +16,17 @@ defmodule Geolix.Adapter.MMDB2Test do
   test "metadata access" do
     assert %Metadata{} = Geolix.metadata(where: :fixture_city)
   end
+
+  test "custom mmdb2 decoder options" do
+    ip = {1, 1, 1, 1}
+
+    assert %{type: "test"} = Geolix.lookup(ip, as: :raw, where: :testdata_plain)
+
+    assert %{"type" => "test"} =
+             Geolix.lookup(ip,
+               as: :raw,
+               where: :testdata_plain,
+               mmdb2_decoder_options: %{keys: :strings}
+             )
+  end
 end
