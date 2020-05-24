@@ -14,7 +14,7 @@ defmodule Geolix.Adapter.MMDB2.Database do
   def lookup(ip, opts, %{id: id} = database) do
     with {%Metadata{} = meta, tree, data} when is_binary(tree) and is_binary(data) <-
            Storage.get(id),
-         mmdb2_opts <- mmdb2_opts(database, opts),
+         mmdb2_opts <- mmdb2_opts(opts, database),
          {:ok, result} when is_map(result) <-
            MMDB2Decoder.lookup(ip, meta, tree, data, mmdb2_opts),
          result_as <- Keyword.get(opts, :as, :struct),
