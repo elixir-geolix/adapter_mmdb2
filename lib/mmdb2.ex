@@ -65,6 +65,23 @@ defmodule Geolix.Adapter.MMDB2 do
             }
           }
         ]
+
+  ### Result Transformation
+
+  By default a result is transformed to a struct matching your database type.
+
+  This setting can be modified by passing an option to the lookup request:
+
+      iex> Geolix.lookup({1, 1, 1, 1}, as: :raw)
+
+  Possible options:
+
+  - `:raw` - Return results as found in the database
+  - `:struct` - Return values after transforming them to a result struct (default)
+
+  Passing `as: :raw` skips the struct transformation and returns the value as
+  read from your database. This option may be necessary if you have configured
+  custom `:mmdb2_decoder_options`.
   """
 
   alias Geolix.Adapter.MMDB2.Database
