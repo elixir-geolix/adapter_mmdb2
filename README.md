@@ -38,6 +38,8 @@ config :geolix,
   ]
 ```
 
+For more configuration details and options please refer to the inline documentation of the `Geolix.Adapter.MMDB2` module.
+
 ## Benchmark
 
 A (minimal) benchmark script is included. Please refer to the Mixfile or `mix help` output for the name.
