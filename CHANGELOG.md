@@ -3,6 +3,7 @@
 ## v0.5.0-dev
 
 - Enhancements
+    - Decoding options can now be configured and passed using `:mmdb2_decoder_options`
     - Usage of `Supervisor` functions becoming deprecated in Elixir `1.11.0` has been removed
 
 - Backwards incompatible changes

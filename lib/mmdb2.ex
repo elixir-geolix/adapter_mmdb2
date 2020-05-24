@@ -29,6 +29,42 @@ defmodule Geolix.Adapter.MMDB2 do
   - `*.gz` - It is expected to be a `gzip` compressed file
   - `*.tar` - It is expected to be a tarball and the first file in the archive ending in `.mmdb` will be loaded.
   - `*.tar.gz` - Combination of the above
+
+  ### MMDB2 Decoder Options
+
+  If not configured or passed otherwise the following options are used for
+  decoding:
+
+      %{
+        double_precision: 8,
+        float_precision: 4,
+        map_keys: :atoms
+      }
+
+  You can pass a custom option to the lookup request:
+
+      iex(1)> mmdb2_opts = %{
+      ......>   double_precision: 8,
+      ......>   float_precision: 4,
+      ......>   map_keys: :strings
+      ......> }
+      iex(2)> Geolix.lookup({1, 1, 1, 1}, mmdb2_decoder_options: mmdb2_opts)
+
+  Or configure your values as the defaults if not passed:
+
+      config :geolix,
+        databases: [
+          %{
+            id: :my_mmdb_database,
+            adapter: Geolix.Adapter.MMDB2,
+            source: "/absolute/path/to/my/database.mmdb",
+            mmdb2_decoder_options: %{
+              double_precision: 8,
+              float_precision: 4,
+              map_keys: :strings
+            }
+          }
+        ]
   """
 
   alias Geolix.Adapter.MMDB2.Database
