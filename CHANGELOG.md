@@ -4,6 +4,7 @@
 
 - Enhancements
     - Decoding options can now be configured and passed using `:mmdb2_decoder_options`
+    - Setting `result_as: :raw` can now by default deactivate the result struct transformation
     - Usage of `Supervisor` functions becoming deprecated in Elixir `1.11.0` has been removed
 
 - Backwards incompatible changes

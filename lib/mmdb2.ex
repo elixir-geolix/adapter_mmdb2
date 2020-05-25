@@ -74,6 +74,18 @@ defmodule Geolix.Adapter.MMDB2 do
 
       iex> Geolix.lookup({1, 1, 1, 1}, as: :raw)
 
+  Or configure a default if not passed:
+
+      config :geolix,
+        databases: [
+          %{
+            id: :my_mmdb_database,
+            adapter: Geolix.Adapter.MMDB2,
+            source: "/absolute/path/to/my/database.mmdb",
+            result_as: :raw
+          }
+        ]
+
   Possible options:
 
   - `:raw` - Return results as found in the database

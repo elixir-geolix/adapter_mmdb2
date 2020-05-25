@@ -17,7 +17,7 @@ defmodule Geolix.Adapter.MMDB2.Database do
          mmdb2_opts <- mmdb2_opts(opts, database),
          {:ok, result} when is_map(result) <-
            MMDB2Decoder.lookup(ip, meta, tree, data, mmdb2_opts),
-         result_as <- Keyword.get(opts, :as, :struct),
+         result_as <- result_as(opts, database),
          result_ip_key <- result_ip_key(mmdb2_opts) do
       result
       |> Map.put(result_ip_key, ip)
@@ -48,6 +48,10 @@ defmodule Geolix.Adapter.MMDB2.Database do
 
   defp mmdb2_opts(opts, database) do
     opts[:mmdb2_decoder_options] || database[:mmdb2_decoder_options] || @mmdb2_opts
+  end
+
+  defp result_as(opts, database) do
+    opts[:as] || database[:result_as] || :struct
   end
 
   defp result_ip_key(%{map_keys: :atoms}), do: :ip_address
