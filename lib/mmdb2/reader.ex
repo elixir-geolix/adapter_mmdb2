@@ -6,6 +6,7 @@ defmodule Geolix.Adapter.MMDB2.Reader do
   """
   @spec read_database(String.t()) :: MMDB2Decoder.parse_result()
   def read_database("http" <> _ = filename) do
+    {:ok, _} = Application.ensure_all_started(:ssl)
     {:ok, _} = Application.ensure_all_started(:inets)
 
     case :httpc.request(String.to_charlist(filename)) do
