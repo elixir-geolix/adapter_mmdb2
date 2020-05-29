@@ -28,7 +28,7 @@ defmodule Geolix.Adapter.MMDB2.MixProject do
 
   def application do
     [
-      extra_applications: [:logger]
+      extra_applications: [:inets, :logger]
     ]
   end
 
