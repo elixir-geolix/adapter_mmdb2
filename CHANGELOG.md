@@ -1,6 +1,6 @@
 # Changelog
 
-## v0.5.0-dev
+## v0.5.0 (2020-05-31)
 
 - Enhancements
     - Decoding options can now be configured and passed using `:mmdb2_decoder_options`
