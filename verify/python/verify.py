@@ -40,6 +40,7 @@ for ip in ips:
 
   results.write(u'%s-%s-%s-%s\n' % (ip, asn_res, city_res, country_res))
 
+asn.close()
 city.close()
 country.close()
 results.close()
