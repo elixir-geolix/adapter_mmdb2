@@ -21,10 +21,17 @@ jobs:
       after_success: mix coveralls.travis
 
     - stage: verify
+      dist: bionic
       elixir: 1.10.4
       otp_release: 23.0
+      addons:
+        apt:
+          packages:
+            - python3-pip
+            - python3-setuptools
+            - python3-wheel
       before_install: |-
-        pip install --user --quiet --ignore-installed geoip2
+        pip3 install --user geoip2
 
         mkdir -p data
 
@@ -52,7 +59,7 @@ jobs:
 
         # verify python results
         pushd python
-          python verify.py
+          python3 verify.py
         popd
 
         # diff results
