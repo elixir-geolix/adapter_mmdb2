@@ -103,8 +103,7 @@ defmodule Geolix.Adapter.MMDB2.MixProject do
     %{
       files: ["CHANGELOG.md", "LICENSE", "mix.exs", "README.md", "lib"],
       licenses: ["Apache 2.0"],
-      links: %{"GitHub" => @url_github},
-      maintainers: ["Marc Neudert"]
+      links: %{"GitHub" => @url_github}
     }
   end
 end
