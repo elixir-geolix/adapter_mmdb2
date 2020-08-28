@@ -11,7 +11,10 @@ defmodule Geolix.Adapter.MMDB2.Reader do
 
     filename = "/tmp/geolite_db"
 
-    with {:ok, :saved_to_file} <- :httpc.request(:get, {String.to_charlist(url), []}, [], [stream: String.to_charlist(filename)]),
+    with {:ok, :saved_to_file} <-
+           :httpc.request(:get, {String.to_charlist(url), []}, [],
+             stream: String.to_charlist(filename)
+           ),
          {:ok, data} <- File.read(filename) do
       result =
         data
