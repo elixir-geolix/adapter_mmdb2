@@ -5,23 +5,29 @@ defmodule Geolix.Adapter.MMDB2.Reader do
   Reads a database file and returns the data and metadata parts from it.
   """
   @spec read_database(String.t()) :: MMDB2Decoder.parse_result()
-  def read_database("http" <> _ = filename) do
+  def read_database("http" <> _ = url) do
     {:ok, _} = Application.ensure_all_started(:ssl)
     {:ok, _} = Application.ensure_all_started(:inets)
 
-    case :httpc.request(String.to_charlist(filename)) do
-      {:ok, {{_, 200, _}, _, body}} ->
-        body
-        |> IO.iodata_to_binary()
+    filename = "/tmp/geolite_db"
+
+    with {:ok, :saved_to_file} <- :httpc.request(:get, {String.to_charlist(url), []}, [], [stream: String.to_charlist(filename)]),
+         {:ok, data} <- File.read(filename) do
+      result =
+        data
         |> maybe_gunzip()
         |> maybe_untar()
         |> MMDB2Decoder.parse_database()
 
-      {:ok, {{_, status, _}, _, _}} ->
-        {:error, {:remote, {:status, status}}}
+      File.rm(filename)
 
+      result
+    else
       {:error, err} ->
         {:error, {:remote, err}}
+
+      {:ok, {{_, status, _}, _, _}} ->
+        {:error, {:remote, {:status, status}}}
     end
   end
 
