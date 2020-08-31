@@ -9,7 +9,7 @@ defmodule Geolix.Adapter.MMDB2.Reader do
     {:ok, _} = Application.ensure_all_started(:ssl)
     {:ok, _} = Application.ensure_all_started(:inets)
 
-    case :httpc.request(String.to_charlist(filename)) do
+    case :httpc.request(:get, {String.to_charlist(filename), []}, [], body_format: :binary) do
       {:ok, {{_, 200, _}, _, body}} ->
         body
         |> IO.iodata_to_binary()
