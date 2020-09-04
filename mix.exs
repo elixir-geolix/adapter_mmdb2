@@ -45,7 +45,7 @@ defmodule Geolix.Adapter.MMDB2.MixProject do
       {:dialyxir, "~> 1.0", only: :dev, runtime: false},
       {:ex_doc, ">= 0.0.0", only: :dev, runtime: false},
       {:excoveralls, "~> 0.13.0", only: :test, runtime: false},
-      {:geolix, github: "elixir-geolix/geolix", rev: "1f8d354de10690ed9881971c3355861634489d9b"},
+      {:geolix, github: "elixir-geolix/geolix", rev: "39d8d2067d0d44d7f44a8034f37c89928ac1cef6"},
       {:geolix_testdata, "~> 0.5.1", only: [:bench, :test], runtime: false},
       {:mmdb2_decoder, "~> 3.0"}
     ]
