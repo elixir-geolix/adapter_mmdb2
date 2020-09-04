@@ -100,6 +100,16 @@ defmodule Geolix.Adapter.MMDB2 do
   alias Geolix.Adapter.MMDB2.Loader
   alias Geolix.Adapter.MMDB2.Storage
 
+  @typedoc """
+  Extended base database type.
+  """
+  @type database :: %{
+          required(:id) => atom,
+          required(:adapter) => module,
+          required(:source) => binary | {:system, binary} | {:system, binary, binary},
+          optional(:init) => {module, atom} | {module, atom, [term]}
+        }
+
   @behaviour Geolix.Adapter
 
   @impl Geolix.Adapter
