@@ -107,7 +107,9 @@ defmodule Geolix.Adapter.MMDB2 do
           required(:id) => atom,
           required(:adapter) => module,
           required(:source) => binary | {:system, binary} | {:system, binary, binary},
-          optional(:init) => {module, atom} | {module, atom, [term]}
+          optional(:init) => {module, atom} | {module, atom, [term]},
+          optional(:mmdb2_decoder_options) => MMDB2Decoder.decode_options(),
+          optional(:result_as) => :raw | :struct
         }
 
   @behaviour Geolix.Adapter
