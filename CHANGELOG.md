@@ -1,6 +1,6 @@
 # Changelog
 
-## v0.6.0-dev
+## v0.6.0 (2020-09-21)
 
 - Enhancements
     - Reduced memory usage when loading a database from a remote location ([#3](https://github.com/elixir-geolix/adapter_mmdb2/pull/3))

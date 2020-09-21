@@ -10,7 +10,7 @@ To use the Geolix MMDB2 Adapter with your projects, edit your `mix.exs` file and
 defp deps do
   [
     # ...
-    {:geolix_adapter_mmdb2, "~> 0.5.0"},
+    {:geolix_adapter_mmdb2, "~> 0.6.0"},
     # ...
   ]
 end
