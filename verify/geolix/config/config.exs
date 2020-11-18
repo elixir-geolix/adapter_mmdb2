@@ -21,5 +21,4 @@ config :geolix,
       adapter: Geolix.Adapter.MMDB2,
       source: path_country
     }
-  ],
-  pool: [size: 1, max_overflow: 0]
+  ]
