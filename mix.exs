@@ -19,8 +19,7 @@ defmodule Geolix.Adapter.MMDB2.MixProject do
       preferred_cli_env: [
         "bench.lookup": :bench,
         coveralls: :test,
-        "coveralls.detail": :test,
-        "coveralls.travis": :test
+        "coveralls.detail": :test
       ],
       test_coverage: [tool: ExCoveralls]
     ]
@@ -59,7 +58,9 @@ defmodule Geolix.Adapter.MMDB2.MixProject do
         :underspecs,
         :unmatched_returns
       ],
-      plt_add_apps: [:inets]
+      plt_add_apps: [:inets],
+      plt_core_path: "plts",
+      plt_file: {:no_warn, "plts/dialyzer.plt"}
     ]
   end
 
