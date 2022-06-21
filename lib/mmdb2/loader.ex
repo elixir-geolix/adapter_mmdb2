@@ -65,7 +65,7 @@ defmodule Geolix.Adapter.MMDB2.Loader do
     error
   end
 
-  defp store_data({:ok, meta, tree, data}, %{id: id}) do
-    Storage.set(id, {meta, tree, data})
+  defp store_data({:ok, meta, tree, data}, %{id: id} = database) do
+    Storage.adapter(database).set(id, {meta, tree, data})
   end
 end
