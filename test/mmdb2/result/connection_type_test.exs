@@ -18,7 +18,7 @@ defmodule Geolix.Adapter.MMDB2.Result.ConnectionTypeTest do
   end
 
   test "cable/dsl" do
-    ip = {1, 0, 1, 0}
+    ip = {1, 0, 2, 0}
     result = Geolix.lookup(ip, where: :fixture_connection)
     expected = %ConnectionType{connection_type: "Cable/DSL", ip_address: ip}
 
@@ -37,14 +37,6 @@ defmodule Geolix.Adapter.MMDB2.Result.ConnectionTypeTest do
     ip = {80, 214, 0, 0}
     result = Geolix.lookup(ip, where: :fixture_connection)
     expected = %ConnectionType{connection_type: "Cellular", ip_address: ip}
-
-    assert result == expected
-  end
-
-  test "dialup" do
-    ip = {1, 0, 2, 0}
-    result = Geolix.lookup(ip, where: :fixture_connection)
-    expected = %ConnectionType{connection_type: "Dialup", ip_address: ip}
 
     assert result == expected
   end
