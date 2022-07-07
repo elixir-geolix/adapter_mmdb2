@@ -60,7 +60,7 @@ defmodule Geolix.Adapter.MMDB2.MixProject do
       ],
       plt_add_apps: [:inets],
       plt_core_path: "plts",
-      plt_file: {:no_warn, "plts/dialyzer.plt"}
+      plt_local_path: "plts"
     ]
   end
 
