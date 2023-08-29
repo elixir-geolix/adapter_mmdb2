@@ -34,7 +34,7 @@ defmodule Geolix.Adapter.MMDB2.Storage do
   def handle_call({:set, entry}, _from, storage_id) do
     true = :ets.insert(storage_id, {:data, entry})
 
-    {:reply, :ok, storage_id}
+    {:reply, :ok, storage_id, :hibernate}
   end
 
   @doc """
