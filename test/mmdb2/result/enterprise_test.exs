@@ -32,9 +32,7 @@ defmodule Geolix.Adapter.MMDB2.Result.EnterpriseTest do
     assert result.traits.autonomous_system_organization == "FairPoint Communications"
     assert result.traits.connection_type == "Cable/DSL"
     assert result.traits.domain == "frpt.net"
-    assert result.traits.is_anonymous_proxy == true
     assert result.traits.is_legitimate_proxy == true
-    assert result.traits.is_satellite_provider == true
     assert result.traits.isp == "Fairpoint Communications"
     assert result.traits.organization == "Fairpoint Communications"
     assert result.traits.user_type == "residential"

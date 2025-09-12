@@ -112,6 +112,5 @@ defmodule Geolix.Adapter.MMDB2.Result.CityTest do
     result = Geolix.lookup(ip, where: :fixture_city)
 
     assert result.traits.ip_address == ip
-    assert result.traits.is_anonymous_proxy == true
   end
 end

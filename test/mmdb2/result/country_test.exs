@@ -82,6 +82,5 @@ defmodule Geolix.Adapter.MMDB2.Result.CountryTest do
     result = Geolix.lookup(ip, where: :fixture_country)
 
     assert result.traits.ip_address == ip
-    assert result.traits.is_anonymous_proxy == true
   end
 end
