@@ -42,14 +42,15 @@ jobs:
 
     - name: verify
       env:
+        MAXMIND_ACCOUNT_ID: ${{ secrets.MAXMIND_ACCOUNT_ID }}
         MAXMIND_LICENSE_KEY: ${{ secrets.MAXMIND_LICENSE_KEY }}
       run: |
         mkdir data
         cd data
 
-        curl -s "https://download.maxmind.com/app/geoip_download?edition_id=GeoLite2-ASN&license_key=${MAXMIND_LICENSE_KEY}&suffix=tar.gz" -o GeoLite2-ASN.tar.gz
-        curl -s "https://download.maxmind.com/app/geoip_download?edition_id=GeoLite2-City&license_key=${MAXMIND_LICENSE_KEY}&suffix=tar.gz" -o GeoLite2-City.tar.gz
-        curl -s "https://download.maxmind.com/app/geoip_download?edition_id=GeoLite2-Country&license_key=${MAXMIND_LICENSE_KEY}&suffix=tar.gz" -o GeoLite2-Country.tar.gz
+        wget --content-disposition --user="${MAXMIND_ACCOUNT_ID}" --password="${MAXMIND_LICENSE_KEY}" "https://download.maxmind.com/geoip/databases/GeoLite2-ASN/download?suffix=tar.gz" -O GeoLite2-ASN.tar.gz
+        wget --content-disposition --user="${MAXMIND_ACCOUNT_ID}" --password="${MAXMIND_LICENSE_KEY}" "https://download.maxmind.com/geoip/databases/GeoLite2-City/download?suffix=tar.gz" -O GeoLite2-City.tar.gz
+        wget --content-disposition --user="${MAXMIND_ACCOUNT_ID}" --password="${MAXMIND_LICENSE_KEY}" "https://download.maxmind.com/geoip/databases/GeoLite2-Country/download?suffix=tar.gz" -O GeoLite2-Country.tar.gz
 
         tar -xzf GeoLite2-ASN.tar.gz
         tar -xzf GeoLite2-City.tar.gz
