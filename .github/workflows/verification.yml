@@ -48,9 +48,9 @@ jobs:
         mkdir data
         cd data
 
-        wget --content-disposition --user="${MAXMIND_ACCOUNT_ID}" --password="${MAXMIND_LICENSE_KEY}" "https://download.maxmind.com/geoip/databases/GeoLite2-ASN/download?suffix=tar.gz" -O GeoLite2-ASN.tar.gz
-        wget --content-disposition --user="${MAXMIND_ACCOUNT_ID}" --password="${MAXMIND_LICENSE_KEY}" "https://download.maxmind.com/geoip/databases/GeoLite2-City/download?suffix=tar.gz" -O GeoLite2-City.tar.gz
-        wget --content-disposition --user="${MAXMIND_ACCOUNT_ID}" --password="${MAXMIND_LICENSE_KEY}" "https://download.maxmind.com/geoip/databases/GeoLite2-Country/download?suffix=tar.gz" -O GeoLite2-Country.tar.gz
+        wget -q --content-disposition --user="${MAXMIND_ACCOUNT_ID}" --password="${MAXMIND_LICENSE_KEY}" "https://download.maxmind.com/geoip/databases/GeoLite2-ASN/download?suffix=tar.gz" -O GeoLite2-ASN.tar.gz
+        wget -q --content-disposition --user="${MAXMIND_ACCOUNT_ID}" --password="${MAXMIND_LICENSE_KEY}" "https://download.maxmind.com/geoip/databases/GeoLite2-City/download?suffix=tar.gz" -O GeoLite2-City.tar.gz
+        wget -q --content-disposition --user="${MAXMIND_ACCOUNT_ID}" --password="${MAXMIND_LICENSE_KEY}" "https://download.maxmind.com/geoip/databases/GeoLite2-Country/download?suffix=tar.gz" -O GeoLite2-Country.tar.gz
 
         tar -xzf GeoLite2-ASN.tar.gz
         tar -xzf GeoLite2-City.tar.gz
