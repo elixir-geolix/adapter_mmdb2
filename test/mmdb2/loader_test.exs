@@ -63,7 +63,7 @@ defmodule Geolix.Adapter.MMDB2.LoaderTest do
     httpd_opts = [
       document_root: String.to_charlist(Fixture.path()),
       port: 0,
-      server_name: 'geolix_test',
+      server_name: ~c"geolix_test",
       server_root: String.to_charlist(Fixture.path())
     ]
 

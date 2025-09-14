@@ -12,13 +12,13 @@ defmodule Geolix.Adapter.MMDB2.LoaderErrorRemoteTest do
 
     def unquote(:do)(mod_data), do: serve_uri(mod(mod_data, :request_uri), mod_data)
 
-    defp serve_uri('/error-status', _mod_data) do
-      body = ''
+    defp serve_uri(~c"/error-status", _mod_data) do
+      body = ~c""
 
       head = [
         code: 500,
         content_length: body |> length() |> Kernel.to_charlist(),
-        content_type: 'text/plain'
+        content_type: ~c"text/plain"
       ]
 
       {:proceed, [{:response, {:response, head, body}}]}
@@ -34,7 +34,7 @@ defmodule Geolix.Adapter.MMDB2.LoaderErrorRemoteTest do
       document_root: root,
       modules: [InetsHandler],
       port: 0,
-      server_name: 'geolix_loader_error_remote_test',
+      server_name: ~c"geolix_loader_error_remote_test",
       server_root: root
     ]
 

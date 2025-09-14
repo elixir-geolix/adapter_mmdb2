@@ -5,8 +5,8 @@
     source: Geolix.TestData.file(:mmdb2, "Benchmark.mmdb")
   })
 
-{:ok, lookup_ipv4} = :inet.parse_address('1.1.1.1')
-{:ok, lookup_ipv4_in_ipv6} = :inet.parse_address('::1.1.1.1')
+{:ok, lookup_ipv4} = :inet.parse_address(~c"1.1.1.1")
+{:ok, lookup_ipv4_in_ipv6} = :inet.parse_address(~c"::1.1.1.1")
 
 Benchee.run(
   %{
