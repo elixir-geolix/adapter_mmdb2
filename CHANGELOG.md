@@ -2,6 +2,9 @@
 
 ## v0.7.0-dev
 
+- Enhancements
+    - Lower memory consumption by hibernating the storage server ([#6](https://github.com/elixir-geolix/adapter_mmdb2/pull/6))
+
 - Backwards incompatible changes
     - Minimum required Elixir version is now `~> 1.9`
 
