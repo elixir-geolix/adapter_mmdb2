@@ -3,7 +3,7 @@ defmodule Geolix.Adapter.MMDB2.MixProject do
 
   @url_changelog "https://hexdocs.pm/geolix_adapter_mmdb2/changelog.html"
   @url_github "https://github.com/elixir-geolix/adapter_mmdb2"
-  @version "0.7.0"
+  @version "0.8.0-dev"
 
   def project do
     [
