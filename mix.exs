@@ -10,7 +10,7 @@ defmodule Geolix.Adapter.MMDB2.MixProject do
       app: :geolix_adapter_mmdb2,
       name: "Geolix Adapter: MMDB2",
       version: @version,
-      elixir: "~> 1.9",
+      elixir: "~> 1.17",
       aliases: aliases(),
       deps: deps(),
       description: "MMDB2 adapter for Geolix",
