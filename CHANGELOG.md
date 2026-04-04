@@ -1,6 +1,6 @@
 # Changelog
 
-## v0.7.0-dev
+## v0.7.0 (2026-04-04)
 
 - Enhancements
     - Lower memory consumption by hibernating the storage server ([#6](https://github.com/elixir-geolix/adapter_mmdb2/pull/6))
