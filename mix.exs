@@ -18,11 +18,6 @@ defmodule Geolix.Adapter.MMDB2.MixProject do
       docs: docs(),
       elixirc_paths: elixirc_paths(Mix.env()),
       package: package(),
-      preferred_cli_env: [
-        "bench.lookup": :bench,
-        coveralls: :test,
-        "coveralls.detail": :test
-      ],
       test_coverage: [tool: ExCoveralls]
     ]
   end
@@ -30,6 +25,16 @@ defmodule Geolix.Adapter.MMDB2.MixProject do
   def application do
     [
       extra_applications: [:inets, :logger, :ssl]
+    ]
+  end
+
+  def cli do
+    [
+      preferred_envs: [
+        "bench.lookup": :bench,
+        coveralls: :test,
+        "coveralls.detail": :test
+      ]
     ]
   end
 
